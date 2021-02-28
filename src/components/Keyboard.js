@@ -15,9 +15,15 @@ const Keyboard = (layout) => {
 
   element.addEventListener('submit', (event) => {
     event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
 
     const keyElement = event.submitter;
-  
+    // Prepare search form
+    const searchInput = document.getElementById('main-search');
+    searchInput.focus();
+    setTimeout(() => searchInput.value = '', 1);
+
     /**
      * Perform click animation.
      */
