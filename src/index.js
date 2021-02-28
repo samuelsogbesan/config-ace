@@ -53,4 +53,15 @@ document.body.onload = event => {
     document.getElementById('main-submit').click();
     return false;
   });
+
+  searchInput.addEventListener('focusin', () => {
+    const resultsContainer = document.getElementById('search-results');
+    document.getElementById('main-submit').click();
+  });
+
+  searchInput.addEventListener('focusout', () => {
+    const resultsContainer = document.getElementById('search-results');
+    resultsContainer.innerHTML = '';
+    searchInput.innerHTML = '';
+  });
 };
