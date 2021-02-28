@@ -1,4 +1,4 @@
-const keyNames = require("./keyNames");
+const keyNames = require("../constants/keyNames");
 
 /**
  * 

@@ -1,4 +1,4 @@
-const keyNames = require("../utils/keyNames");
+const keyNames = require("../constants/keyNames");
 
 /**
  * Generates a key element.
