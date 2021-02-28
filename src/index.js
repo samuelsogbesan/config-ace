@@ -30,7 +30,6 @@ document.body.onload = event => {
 
     const formData = new FormData(event.target);
     const query = formData.get('search');
-    console.log(query)
     const results = search(query);
 
     const resultsContainer = document.getElementById('search-results');
