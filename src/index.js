@@ -19,4 +19,10 @@ document.body.onload = event => {
       throw err;
     }
   });
+
+  // Hook Search
+  const searchInput = document.getElementById('main-search');
+  searchInput.addEventListener('change', event => {
+    console.log(search(event.target.value).length);
+  });
 };
