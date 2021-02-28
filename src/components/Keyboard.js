@@ -24,7 +24,10 @@ const Keyboard = (layout) => {
     if (document.activeElement !== searchInput) {
       searchInput.focus();
       setTimeout(() => searchInput.value = '', 1);
-      document.getElementById('current-key').innerHTML = keyElement.getAttribute('data-bindcode');
+      
+      const bindCode = keyElement.getAttribute('data-bindcode');
+
+      if (bindCode !== 'unbindable') document.getElementById('current-key').innerHTML = bindCode;
     }
 
     /**
