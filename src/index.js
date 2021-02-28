@@ -24,17 +24,23 @@ document.body.onload = event => {
   // Hook Search
   const searchForm = document.getElementById('search-form');
   searchForm.addEventListener('submit', event => {
-    console.log("here")
     event.preventDefault();
     event.stopPropagation();
     event.stopImmediatePropagation();
 
     const formData = new FormData(event.target);
     const query = formData.get('search');
+    console.log(query)
     const results = search(query);
 
     const resultsContainer = document.getElementById('search-results');
     resultsContainer.innerHTML = '';
+
+    if (results.length === 0) {
+      resultsContainer.classList.add('hidden');
+    } else {
+      resultsContainer.classList.remove('hidden');
+    }
 
     for (var i = 0; i < results.length; i++) {
       const span = document.createElement('span');
@@ -61,6 +67,11 @@ document.body.onload = event => {
   searchInput.addEventListener('focusout', () => {
     const resultsContainer = document.getElementById('search-results');
     resultsContainer.innerHTML = '';
-    searchInput.innerHTML = '';
+
+    // Hacky solution: query again but a string that gives no data. Clear after query.
+    // Make unhacky by decoupling the search state code.
+    searchInput.value = 'NOTAVALIDCOMMAND';
+    document.getElementById('main-submit').click();
+    searchInput.value = '';
   });
 };

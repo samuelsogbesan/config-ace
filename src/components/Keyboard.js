@@ -27,7 +27,14 @@ const Keyboard = (layout) => {
       
       const bindCode = keyElement.getAttribute('data-bindcode');
 
-      if (bindCode !== 'unbindable') document.getElementById('current-key').innerHTML = bindCode;
+      const currentKeyDisplay = document.getElementById('current-key');
+
+      if (bindCode !== 'unbindable') {
+        currentKeyDisplay.innerHTML = bindCode;
+        currentKeyDisplay.classList.remove('hidden');
+      } else {
+        currentKeyDisplay.classList.add('hidden');
+      }
     }
 
     /**
