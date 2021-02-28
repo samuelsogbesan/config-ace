@@ -103,6 +103,11 @@ html {
   color: white;
 }
 
+.search-results {
+  color: white;
+  padding: 16px 0;
+}
+
 #current-key {
   color: white;
 }
