@@ -102,3 +102,7 @@ html {
   background-color: rgb(116, 116, 116);
   color: white;
 }
+
+#current-key {
+  color: white;
+}
