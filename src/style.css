@@ -84,3 +84,21 @@ html {
   justify-content: center;
   align-items: center;
 }
+
+.search-nav {
+  background-color: #181B22;
+  top: 0;
+  padding: 20px;
+  position: fixed;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+.search {
+  padding: 5px 10px;
+  border-radius: 2px;
+  border: none;
+  width: 50ch;
+  background-color: rgb(116, 116, 116);
+  color: white;
+}
