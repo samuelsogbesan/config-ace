@@ -10,10 +10,11 @@
 <body class="container">
   <nav class="search-nav">
     <h1 id="current-key"></h1>
-    <form id="search-form"><input id="main-search" name="search" class="search" type="search" placeholder="Search for a command..."></form>
-    <div class="search-results">
-      <span class="search-result">result</span>
-    </div>
+    <form id="search-form">
+      <input id="main-search" name="search" class="search" type="search" placeholder="Search for a command...">
+      <input id="main-submit" type="submit" style="display: none;">
+    </form>
+    <div id="search-results"></div>
   </nav>
   <script defer src="index.js"></script>
 </body>
