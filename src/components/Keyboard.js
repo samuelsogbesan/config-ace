@@ -19,10 +19,12 @@ const Keyboard = (layout) => {
     event.stopImmediatePropagation();
 
     const keyElement = event.submitter;
-    // Prepare search form
     const searchInput = document.getElementById('main-search');
-    searchInput.focus();
-    setTimeout(() => searchInput.value = '', 1);
+
+    if (document.activeElement !== searchInput) {
+      searchInput.focus();
+      setTimeout(() => searchInput.value = '', 1);
+    }
 
     /**
      * Perform click animation.
