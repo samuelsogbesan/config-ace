@@ -103,7 +103,9 @@ html {
   color: white;
 }
 
-.search-results {
+#search-results {
+  display: flex;
+  flex-direction: column;
   color: white;
   padding: 16px 0;
 }
