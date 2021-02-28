@@ -47,7 +47,6 @@ document.body.onload = event => {
 
   const searchInput = document.getElementById('main-search');
   searchInput.addEventListener('input', (event) => {
-    console.log("firign")
     event.preventDefault();
     event.stopPropagation();
     document.getElementById('main-submit').click();
