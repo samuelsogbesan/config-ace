@@ -1,8 +1,0 @@
-#keyboard {
-  display: grid;
-  /**Number of single keys in a row of a keyboard between left ctrl and right ctrl**/
-  grid-template-columns: 14fr;
-  
-  /**Number of rows of keys**/
-  grid-template-rows: 6fr;
-}
