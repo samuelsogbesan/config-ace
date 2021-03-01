@@ -1,7 +1,7 @@
 const Keyboard = require('./components/Keyboard.js');
 const keyToBind = require('./utils/keyToBind.js');
 const layouts = require('./constants/LAYOUTS.js');
-const search = require('./utils/search');
+const search = require('./utils/command-search');
 
 document.body.onload = event => {
   // Generate keyboard
