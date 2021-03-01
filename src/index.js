@@ -2,6 +2,8 @@ const Keyboard = require('./components/Keyboard.js');
 const keyToBind = require('./utils/keyToBind.js');
 const layouts = require('./constants/LAYOUTS.js');
 const search = require('./utils/command-search');
+const QueryState = require('./state/query');
+const ConfigState = require('./state/config.js');
 
 document.body.onload = event => {
   // Generate keyboard
@@ -30,8 +32,14 @@ document.body.onload = event => {
   const resultsForm = document.getElementById('search-results-form');
   resultsForm.addEventListener('submit', event => {
     event.preventDefault();
-    const data = new FormData(event.target);
-    console.log(data.get('result'));
+    const bindCode = QueryState.getState();
+    const command = new FormData(event.target);
+
+    if (bindCode !== "unbindable") {
+      ConfigState.addBind(bindCode, {command: command.get('result'), value: 'placeholder'});
+    }
+
+    console.log(ConfigState.getState());
   });
 
   // Hook Search
