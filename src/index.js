@@ -21,6 +21,19 @@ document.body.onload = event => {
     }
   });
 
+  const resultsContainer = document.getElementById('search-results');
+  resultsContainer.addEventListener('click', event => {
+    document.getElementById('search-results-submit').click();
+  });
+
+  // When People Click a Search Result
+  const resultsForm = document.getElementById('search-results-form');
+  resultsForm.addEventListener('submit', event => {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    console.log(data.get('result'));
+  });
+
   // Hook Search
   const searchForm = document.getElementById('search-form');
   searchForm.addEventListener('submit', event => {
@@ -32,19 +45,23 @@ document.body.onload = event => {
     const query = formData.get('search');
     const results = search(query);
 
-    const resultsContainer = document.getElementById('search-results');
     resultsContainer.innerHTML = '';
 
     if (results.length === 0) {
-      resultsContainer.classList.add('hidden');
+      resultsForm.classList.add('hidden');
     } else {
-      resultsContainer.classList.remove('hidden');
+      resultsForm.classList.remove('hidden');
     }
 
     for (var i = 0; i < results.length; i++) {
-      const span = document.createElement('span');
-      span.innerHTML = results[i];
-      resultsContainer.appendChild(span);
+      const option = document.createElement('option');
+      option.value = results[i];
+      option.name = results[i];
+      option.innerHTML = results[i];
+
+      const pageSize = results.length < 10 ? results.length : 10;
+      resultsContainer.setAttribute('size', pageSize);
+      resultsContainer.appendChild(option);
     }
 
     return false;
@@ -59,7 +76,6 @@ document.body.onload = event => {
   });
 
   searchInput.addEventListener('focusin', () => {
-    const resultsContainer = document.getElementById('search-results');
     document.getElementById('main-submit').click();
   });
 
@@ -73,4 +89,5 @@ document.body.onload = event => {
     document.getElementById('main-submit').click();
     searchInput.value = '';
   });
+
 };
