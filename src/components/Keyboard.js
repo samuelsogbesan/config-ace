@@ -1,3 +1,4 @@
+const QueryState = require('../state/query');
 const Key = require('./Key');
 
 /**
@@ -28,6 +29,7 @@ const Keyboard = (layout) => {
       const bindCode = keyElement.getAttribute('data-bindcode');
 
       const currentKeyDisplay = document.getElementById('current-key');
+      QueryState.setQuery(bindCode);
 
       if (bindCode !== 'unbindable') {
         currentKeyDisplay.innerHTML = bindCode;
