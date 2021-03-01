@@ -40,7 +40,7 @@ ConfigState.removeBind = (bindCode, commandToRemove) => {
  * @param {*} command on object {commandName, commandValue}
  * TODO make it update binds
  */
-ConfigState.addBind = (bindCode, command) => {
+ConfigState.addBind = (bindCode, command) => { 
   let s = ConfigState.getState();
   if (!s[bindCode]) {
     s[bindCode] = [];
