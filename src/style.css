@@ -108,9 +108,12 @@ html {
   display: flex;
   flex-direction: column;
   color: white;
-  padding: 16px 0;
+  margin: 10px 0;
   overflow-y: scroll;
   max-height: 30vh;
+  width: 100%;
+  background-color: transparent;
+  border: none;
 }
 
 .hidden {
