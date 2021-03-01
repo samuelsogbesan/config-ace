@@ -14,7 +14,10 @@
       <input id="main-search" name="search" class="search" type="search" placeholder="Search for a command..." autocomplete="off">
       <input id="main-submit" type="submit" class="hidden">
     </form>
-    <div id="search-results" class="hidden"></div>
+    <form id="search-results-form" class="hidden">
+      <select name="result" id="search-results" size=10></select>
+      <input id="search-results-submit" type="submit" class="hidden">
+    </form>
   </nav>
   <script defer src="index.js"></script>
 </body>
