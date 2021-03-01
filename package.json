@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/samuelsogbesan/easy-config/issues"
   },
-  "homepage": "https://github.com/samuelsogbesan/easy-config#readme"
+  "homepage": "https://github.com/samuelsogbesan/easy-config#readme",
+  "dependencies": {
+    "local-storage": "^2.0.0"
+  }
 }
