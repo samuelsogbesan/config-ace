@@ -1,7 +1,7 @@
 const ls = require('local-storage');
 const IState = require('./IState');
 
-const state = ls.bind(this, 'config');
+const state = ls.bind(this, 'query');
 
 const setState = newState => state(newState);
 
