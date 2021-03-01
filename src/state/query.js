@@ -14,4 +14,4 @@ QueryState.export = () => JSON.stringify(state());
 
 QueryState.setQuery = (newQuery) => setState(newQuery);
 
-module.exports = query;
+module.exports = QueryState;
