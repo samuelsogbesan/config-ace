@@ -10,7 +10,25 @@ ConfigState.prototype = Object.create(IState);
 
 ConfigState.getState = () => state();
 
-ConfigState.export = () => JSON.stringify(state());
+ConfigState.toString = () => JSON.stringify(state());
+
+/**
+ * The binds returned as an array of bind strings.
+ */
+ConfigState.export = () => {
+  let s = state();
+
+  const binds = [];
+  Object.keys(s).forEach(key => {
+    let bindString = `bind "${key}" "`;
+    s[key].forEach(({command, value}) => { 
+      bindString = bindString.concat(`${command} ${value};`);
+    });
+    bindString = bindString.concat(`"\n`);
+    binds.push(bindString);
+  });
+  return binds;
+}
 
 ConfigState.getBind = (bindCode) => ConfigState.getState()[bindCode];
 
@@ -33,6 +51,8 @@ ConfigState.removeBind = (bindCode, commandToRemove) => {
     throw new Error(`${bindCode} is not a valid bind code.`);
   }
 }
+
+ConfigState.clear = () => setState({});
 
 /**
  * 
