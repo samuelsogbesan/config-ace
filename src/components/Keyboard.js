@@ -7,8 +7,7 @@ const ConfigState = require('../state/config');
  * Creates a DOMElement that represents a keyboard.
  * @param {*} layout QWERTY
  */
-const Keyboard = (layout) => {
-  const element = document.createElement('form');
+const Keyboard = (layout, element = document.createElement('form')) => {
   element.classList.add('keyboard');
 
   for (var i = 0; i < layout.length; i++) {
