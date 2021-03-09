@@ -4,6 +4,7 @@ const layouts = require('./constants/LAYOUTS.js');
 const search = require('./utils/command-search');
 const QueryState = require('./state/query');
 const ConfigState = require('./state/config.js');
+const UIManagementTools = require('./state/ui.js');
 
 document.body.onload = event => {
   // Generate keyboard
@@ -26,6 +27,7 @@ document.body.onload = event => {
   const resultsContainer = document.getElementById('search-results');
   resultsContainer.addEventListener('click', event => {
     document.getElementById('search-results-submit').click();
+    UIManagementTools.closeTray();
   });
 
   // When People Click a Search Result
@@ -49,27 +51,51 @@ document.body.onload = event => {
     event.stopPropagation();
     event.stopImmediatePropagation();
 
+    resultsContainer.innerHTML = '';
+
     const formData = new FormData(event.target);
     const query = formData.get('search');
     const results = search(query);
 
-    resultsContainer.innerHTML = '';
+    const q = QueryState.getState();
 
-    if (results.length === 0) {
-      resultsForm.classList.add('hidden');
-    } else {
-      resultsForm.classList.remove('hidden');
+    // The idea is to track what commands have already been bound, so that we can highlight these binds in the menu later.
+    let BoundCommandSet = new Set();
+
+    let binds = ConfigState.getBind(q);
+    if (binds) {
+      results.sort((a, b) => {
+        let aBindExists = binds.some(value => value.command === a)//.some(key => binds[key].command === a);
+        let bBindExists = binds.some(value => value.command === b);
+        
+        if (aBindExists) BoundCommandSet.add(a);
+        if (bBindExists) BoundCommandSet.add(b);
+
+        if (aBindExists && bBindExists) return a.localeCompare(b);
+        else if (aBindExists) return -1;
+        else if (bBindExists) return 1;
+        else return 0;
+       });
     }
 
     for (var i = 0; i < results.length; i++) {
       const option = document.createElement('option');
       option.value = results[i];
       option.name = results[i];
+
+      if (BoundCommandSet.size > 0 && BoundCommandSet.has(results[i])) option.classList.add('bound');
+
       option.innerHTML = results[i];
 
       const pageSize = results.length < 10 ? results.length : 10;
       resultsContainer.setAttribute('size', pageSize);
       resultsContainer.appendChild(option);
+    }
+
+    if (results.length === 0) {
+      UIManagementTools.closeTray();
+    } else {
+      UIManagementTools.openTray();
     }
 
     return false;
@@ -86,16 +112,4 @@ document.body.onload = event => {
   searchInput.addEventListener('focusin', () => {
     document.getElementById('main-submit').click();
   });
-
-  searchInput.addEventListener('focusout', () => {
-    const resultsContainer = document.getElementById('search-results');
-    resultsContainer.innerHTML = '';
-
-    // Hacky solution: query again but a string that gives no data. Clear after query.
-    // Make unhacky by decoupling the search state code.
-    searchInput.value = 'NOTAVALIDCOMMAND';
-    document.getElementById('main-submit').click();
-    searchInput.value = '';
-  });
-
 };
