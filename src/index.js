@@ -111,9 +111,4 @@ document.body.onload = event => {
   searchInput.addEventListener('focusin', () => {
     document.getElementById('main-submit').click();
   });
-
-  searchInput.addEventListener('focusout', () => {
-    // Call this on a short delay to give time for the click event on the search-form-results.
-    setTimeout(() => UIManagementTools.closeTray(), 50);
-  });
 };
