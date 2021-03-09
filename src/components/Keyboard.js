@@ -24,7 +24,7 @@ const Keyboard = (layout, element = document.createElement('form')) => {
 
     if (keyElement.value === '!💾') {
       const blobParts = ConfigState.export();
-      blobParts.push('// Config Courtesy of "Easy Config", a CSGO Config Generator by @sam.sog 🥳\n');
+      blobParts.unshift('// Config Courtesy of "Easy Config", a CSGO Config Generator by @sam.sog 🥳\n');
       const file = new Blob(blobParts, {endings: 'native'});
       const a = document.createElement('a');
       a.download='config.cfg'
