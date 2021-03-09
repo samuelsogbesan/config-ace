@@ -8,8 +8,7 @@ const UIManagementTools = require('./state/ui.js');
 
 document.body.onload = event => {
   // Generate keyboard
-  const keyboard = Keyboard(layouts.QWERTY);
-  document.body.appendChild(keyboard);
+  Keyboard(layouts.QWERTY, document.getElementById('keyboard'));
 
   // Listen for key inputs
   document.body.addEventListener('keydown', ({code}) => {
