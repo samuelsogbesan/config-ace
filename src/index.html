@@ -8,8 +8,8 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="container" id="body">
-  <nav class="search-nav">
-    <h1 id="current-key" class="hidden"></h1>
+  <header class="search-nav">
+    <h1 id="current-key"></h1>
     <form id="search-form">
       <input id="main-search" name="search" class="search" type="search" placeholder="Search for a command..." autocomplete="off">
       <input id="main-submit" type="submit" class="hidden">
@@ -18,9 +18,18 @@
       <select name="result" id="search-results" size=10></select>
       <input id="search-results-submit" type="submit" class="hidden">
     </form>
-  </nav>
+  </header>
 
   <form id='keyboard'></form>
+
+  <footer class="footer">
+    <div>
+      <span id="instruction-box">Hit any key on your keyboard!</span>
+    </div>
+    <div>
+      <a href="https://www.github.com/">GitHub</a>
+    </div>
+  </footer>
 
   <script defer src="index.js"></script>
 </body>
