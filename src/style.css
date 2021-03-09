@@ -116,6 +116,15 @@ html {
   border: none;
 }
 
+#search-results > *:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.bound {
+  color: green;
+}
+
 .hidden {
   display: none !important;
 }
