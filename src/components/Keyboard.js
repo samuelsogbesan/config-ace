@@ -1,5 +1,7 @@
 const QueryState = require('../state/query');
 const Key = require('./Key');
+const fs = require('fs');
+const ConfigState = require('../state/config');
 
 /**
  * Creates a DOMElement that represents a keyboard.
@@ -20,16 +22,28 @@ const Keyboard = (layout) => {
     event.stopImmediatePropagation();
 
     const keyElement = event.submitter;
+
+    if (keyElement.value === '!💾') {
+      const blobParts = ConfigState.export();
+      const file = new Blob(blobParts, {endings: 'native'});
+      const a = document.createElement('a');
+      a.download='config.cfg'
+      a.href = URL.createObjectURL(file);
+      a.click();
+      return;
+    } else if (keyElement.value === '!❌') {
+      ConfigState.clear();
+    }
+
     const searchInput = document.getElementById('main-search');
 
     if (document.activeElement !== searchInput) {
-      searchInput.focus();
-      setTimeout(() => searchInput.value = '', 1);
-      
       const bindCode = keyElement.getAttribute('data-bindcode');
 
       const currentKeyDisplay = document.getElementById('current-key');
       QueryState.setQuery(bindCode);
+
+      searchInput.focus();
 
       if (bindCode !== 'unbindable') {
         currentKeyDisplay.innerHTML = bindCode;
