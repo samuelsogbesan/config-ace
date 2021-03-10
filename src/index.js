@@ -39,6 +39,7 @@ document.body.onload = event => {
 
     if (bindCode !== "unbindable") {
       ConfigState.addBind(bindCode, {command: command.get('result'), value: 'placeholder'});
+      UIManagementTools.refreshBindCounter(bindCode);
     }
   });
 
