@@ -2,6 +2,7 @@ const QueryState = require('../state/query');
 const Key = require('./Key');
 const fs = require('fs');
 const ConfigState = require('../state/config');
+const UIManagementTools = require('../state/ui');
 
 /**
  * Creates a DOMElement that represents a keyboard.
@@ -52,6 +53,8 @@ const Keyboard = (layout, element = document.createElement('form')) => {
         currentKeyDisplay.classList.add('hidden');
       }
     }
+
+    UIManagementTools.hintToast('Select a command from the drop down menu.');
 
     /**
      * Perform click animation.
