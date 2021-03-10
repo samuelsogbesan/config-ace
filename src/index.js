@@ -26,6 +26,7 @@ document.body.onload = event => {
   const resultsContainer = document.getElementById('search-results');
   resultsContainer.addEventListener('click', event => {
     document.getElementById('search-results-submit').click();
+    UIManagementTools.flashToast(`${'A'} Has been bound to ${'B'}`);
     UIManagementTools.closeTray();
   });
 
@@ -39,8 +40,6 @@ document.body.onload = event => {
     if (bindCode !== "unbindable") {
       ConfigState.addBind(bindCode, {command: command.get('result'), value: 'placeholder'});
     }
-
-    console.log(ConfigState.getState());
   });
 
   // Hook Search
