@@ -5,6 +5,7 @@ const search = require('./utils/command-search');
 const QueryState = require('./state/query');
 const ConfigState = require('./state/config.js');
 const UIManagementTools = require('./state/ui.js');
+const { getKey } = require('./utils/getKey.js');
 
 document.body.onload = event => {
   // Generate keyboard
@@ -15,8 +16,7 @@ document.body.onload = event => {
     let bindCode;
     try {
       bindCode = keyToBind(code);
-      const selector = `.key[data-bindcode="${bindCode}"]`;
-      const keyElement = document.querySelector(selector);
+      const keyElement = getKey(bindCode);
       keyElement.click();
     } catch (err) {
       throw err;
