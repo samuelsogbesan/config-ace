@@ -33,6 +33,7 @@ const Keyboard = (layout, element = document.createElement('form')) => {
       a.click();
       return;
     } else if (keyElement.value === '!❌') {
+      UIManagementTools.clearBindCounters();
       ConfigState.clear();
     }
 
