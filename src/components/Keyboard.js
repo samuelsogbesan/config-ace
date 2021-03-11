@@ -34,6 +34,7 @@ const Keyboard = (layout, element = document.createElement('form')) => {
       return;
     } else if (keyElement.value === '!❌') {
       UIManagementTools.clearBindCounters();
+      UIManagementTools.warnToast('Config Cleared!');
       UIManagementTools.closeTray();
       ConfigState.clear();
     }
@@ -50,12 +51,11 @@ const Keyboard = (layout, element = document.createElement('form')) => {
         searchInput.focus();
         currentKeyDisplay.innerHTML = bindCode;
         currentKeyDisplay.classList.remove('hidden');
+        UIManagementTools.hintToast('Select a command from the drop down menu.');
       } else {
         currentKeyDisplay.classList.add('hidden');
       }
     }
-
-    UIManagementTools.hintToast('Select a command from the drop down menu.');
 
     /**
      * Perform click animation.
