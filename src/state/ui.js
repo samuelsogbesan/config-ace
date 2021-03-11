@@ -1,4 +1,5 @@
 const ConfigState = require('./config');
+const QueryState = require('./query');
 
 /**
  * Basic UI Manager
@@ -37,10 +38,14 @@ UIManagementTools.flashToast = (message, oldMessage = UITargets.InstructionBox.i
 }
 
 UIManagementTools.refreshBindCounter = (bind) => {
-  const bindCount = ConfigState.getBind(bind).length;
-  const selector = `.key[data-bindcode="${bind}"]`;
-  const keyElement = document.querySelector(selector);
-  keyElement.setAttribute('data-bindcount', bindCount);
+  let binds = ConfigState.getBind(bind);
+
+  if (binds) {
+    const bindCount = binds.length;
+    const selector = `.key[data-bindcode="${bind}"]`;
+    const keyElement = document.querySelector(selector);
+    keyElement.setAttribute('data-bindcount', bindCount);
+  }
 }
 
 UIManagementTools.clearBindCounters = () => {
@@ -61,11 +66,25 @@ UIManagementTools.refreshSearchResults = (results, effect = (result, option = do
   let resultsContainer = UITargets.Tray;
   resultsContainer.innerHTML = '';
 
+  let bindCode = QueryState.getState();
+  let binds = ConfigState.getBind(bindCode);
+
   for (var i = 0; i < results.length; i++) {
+    let result = results[i];
     const option = document.createElement('option');
-    option.value = results[i];
-    option.name = results[i];
-    option.innerHTML = results[i];
+    option.value = result;
+    option.name = result;
+
+    if (binds) {
+      let command;
+      command = binds.find(val => val.command === result);
+      if (command) option.innerHTML = `${result} (${command.value})`;
+      else {
+        option.innerHTML = `${result}`;
+      }
+    } else {
+      option.innerHTML = `${result}`;
+    }
 
     effect(results[i], option);
     //if (BoundCommandSet.size > 0 && BoundCommandSet.has(results[i])) option.classList.add('bound');
