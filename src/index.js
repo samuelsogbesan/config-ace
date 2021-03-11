@@ -26,7 +26,6 @@ document.body.onload = event => {
   const resultsContainer = document.getElementById('search-results');
   resultsContainer.addEventListener('click', event => {
     document.getElementById('search-results-submit').click();
-    UIManagementTools.flashToast(`${'A'} Has been bound to ${'B'}`);
     UIManagementTools.closeTray();
   });
 
@@ -35,11 +34,12 @@ document.body.onload = event => {
   resultsForm.addEventListener('submit', event => {
     event.preventDefault();
     const bindCode = QueryState.getState();
-    const command = new FormData(event.target);
+    const command = new FormData(event.target).get('result');
 
     if (bindCode !== "unbindable") {
-      ConfigState.addBind(bindCode, {command: command.get('result'), value: 'placeholder'});
+      ConfigState.addBind(bindCode, {command: command, value: 'placeholder'});
       UIManagementTools.refreshBindCounter(bindCode);
+      UIManagementTools.flashToast(`${command} Has been bound to ${bindCode}`);
     }
   });
 
