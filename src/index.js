@@ -30,7 +30,7 @@ document.body.onload = event => {
   });
 
   // When People Click a Search Result
-  const resultsForm = document.getElementById('search-results-form');
+  const resultsForm = document.getElementById('search-form');
   resultsForm.addEventListener('submit', event => {
     event.preventDefault();
     const bindCode = QueryState.getState();
@@ -43,17 +43,13 @@ document.body.onload = event => {
     }
   });
 
-  // Hook Search
-  const searchForm = document.getElementById('search-form');
-  searchForm.addEventListener('submit', event => {
-    event.preventDefault();
-    event.stopPropagation();
-    event.stopImmediatePropagation();
-
-    resultsContainer.innerHTML = '';
-
-    const formData = new FormData(event.target);
-    const query = formData.get('search');
+  /**
+   * Event Handler for Search Activity.
+   * @param {*} event 
+   * @returns 
+   */
+  const searchHandle = (event) => {
+    const query = new FormData(resultsForm).get('search');
     const results = search(query);
 
     const q = QueryState.getState();
@@ -77,19 +73,9 @@ document.body.onload = event => {
        });
     }
 
-    for (var i = 0; i < results.length; i++) {
-      const option = document.createElement('option');
-      option.value = results[i];
-      option.name = results[i];
-
-      if (BoundCommandSet.size > 0 && BoundCommandSet.has(results[i])) option.classList.add('bound');
-
-      option.innerHTML = results[i];
-
-      const pageSize = results.length < 10 ? results.length : 10;
-      resultsContainer.setAttribute('size', pageSize);
-      resultsContainer.appendChild(option);
-    }
+    UIManagementTools.refreshSearchResults(results, (result, element) => {
+      if (BoundCommandSet.has(result)) element.classList.add('bound');
+    });
 
     if (results.length === 0) {
       UIManagementTools.closeTray();
@@ -98,17 +84,12 @@ document.body.onload = event => {
     }
 
     return false;
-  });
+  }
 
   const searchInput = document.getElementById('main-search');
-  searchInput.addEventListener('input', (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    document.getElementById('main-submit').click();
-    return false;
-  });
-
-  searchInput.addEventListener('focusin', () => {
-    document.getElementById('main-submit').click();
+  searchInput.addEventListener('input', searchHandle);
+  searchInput.addEventListener('focusin', searchHandle);
+  searchInput.addEventListener('focusout', event => {
+    UIManagementTools.hintToast(`Hit any key on your keyboard!`);
   });
 };
