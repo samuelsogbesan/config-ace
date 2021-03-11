@@ -5,6 +5,9 @@ const state = ls.bind(this, 'query');
 
 const setState = newState => state(newState);
 
+/**
+ * Holds the value of the current key being pressed.
+ */
 const QueryState = {};
 QueryState.prototype = Object.create(IState);
 
