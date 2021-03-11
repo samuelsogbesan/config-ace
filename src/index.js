@@ -90,6 +90,10 @@ document.body.onload = event => {
   searchInput.addEventListener('input', searchHandle);
   searchInput.addEventListener('focusin', searchHandle);
   searchInput.addEventListener('focusout', event => {
+    if (event.explicitOriginalTarget === body) {
+      UIManagementTools.closeTray();
+    }
+
     UIManagementTools.hintToast(`Hit any key on your keyboard!`);
   });
 };
