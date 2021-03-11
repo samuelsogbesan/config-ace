@@ -59,6 +59,7 @@ UIManagementTools.clearBindCounters = () => {
  */
 UIManagementTools.refreshSearchResults = (results, effect = (result, option = document.createElement('option')) => {}) => {
   let resultsContainer = UITargets.Tray;
+  resultsContainer.innerHTML = '';
 
   for (var i = 0; i < results.length; i++) {
     const option = document.createElement('option');
