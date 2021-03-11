@@ -34,6 +34,7 @@ const Keyboard = (layout, element = document.createElement('form')) => {
       return;
     } else if (keyElement.value === '!❌') {
       UIManagementTools.clearBindCounters();
+      UIManagementTools.closeTray();
       ConfigState.clear();
     }
 
@@ -45,9 +46,8 @@ const Keyboard = (layout, element = document.createElement('form')) => {
       const currentKeyDisplay = document.getElementById('current-key');
       QueryState.setQuery(bindCode);
 
-      searchInput.focus();
-
       if (bindCode !== 'unbindable') {
+        searchInput.focus();
         currentKeyDisplay.innerHTML = bindCode;
         currentKeyDisplay.classList.remove('hidden');
       } else {
