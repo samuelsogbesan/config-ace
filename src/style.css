@@ -173,7 +173,7 @@ a {
 }
 
 #current-key::after {
-	content: "(current key)";
+	content: "(bind to)";
   font-size: 10px;
 	padding: 0 8px;
 }
