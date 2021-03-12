@@ -172,6 +172,12 @@ a {
   margin-bottom: 10px;
 }
 
+#current-key::after {
+	content: "(current key)";
+  font-size: 10px;
+	padding: 0 8px;
+}
+
 nav, div, section, header, footer {
   background-color: #181B22;
   color: white;
