@@ -12,8 +12,7 @@ const Keyboard = (layout, element = document.createElement('form')) => {
   element.classList.add('keyboard');
 
   for (var i = 0; i < layout.length; i++) {
-    const key = Key(layout[i]);
-    element.appendChild(key);
+    Key(layout[i], element);
   }
 
   element.addEventListener('submit', (event) => {
