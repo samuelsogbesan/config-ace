@@ -3,6 +3,10 @@ const IState = require('./IState');
 
 const state = ls.bind(this, 'config');
 
+if (!state()) {
+  state({});
+}
+
 const setState = newState => state(newState);
 
 const ConfigState = {};

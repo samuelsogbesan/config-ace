@@ -3,6 +3,10 @@ const IState = require('./IState');
 
 const state = ls.bind(this, 'query');
 
+if (!state()) {
+  state({});
+}
+
 const setState = newState => state(newState);
 
 /**
