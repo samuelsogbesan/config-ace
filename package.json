@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "predeploy": "parcel build index.html",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d dist",
     "start": "parcel index.html"
   },
   "repository": {
@@ -18,12 +18,12 @@
   "bugs": {
     "url": "https://github.com/samuelsogbesan/easy-config/issues"
   },
-  "homepage": "https://github.com/samuelsogbesan/easy-config",
+  "homepage": "https://samuelsogbesan.github.io/easy-config",
   "dependencies": {
     "local-storage": "^2.0.0"
   },
   "devDependencies": {
-    "gh-pages": "^3.1.0",
-    "parcel-bundler": "^1.12.4"
+    "cssnano": "^4.1.10",
+    "gh-pages": "^3.1.0"
   }
 }
