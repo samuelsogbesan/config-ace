@@ -4,7 +4,9 @@
   "description": "CSGO Config Web App",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "parcel build src/index.html",
+    "start": "parcel src/index.html"
   },
   "repository": {
     "type": "git",
@@ -18,5 +20,8 @@
   "homepage": "https://github.com/samuelsogbesan/easy-config#readme",
   "dependencies": {
     "local-storage": "^2.0.0"
+  },
+  "devDependencies": {
+    "cssnano": "^4.1.10"
   }
 }
