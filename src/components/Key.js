@@ -1,10 +1,11 @@
 const keyNames = require("../constants/keyNames");
+const UIManagementTools = require("../state/ui");
 
 /**
  * Generates a key element.
  * @param {*} keyString the key to be displayed on the key.
  */
-const Key = (bindCode) => {
+const Key = (bindCode, parent = document) => {
   const key = document.createElement('button');
   key.type = 'submit';
 
@@ -25,6 +26,9 @@ const Key = (bindCode) => {
 
   key.classList.add('key');
 
+  parent.appendChild(key);
+
+  UIManagementTools.refreshBindCounter(bindCode);
   return key;
 }
 
