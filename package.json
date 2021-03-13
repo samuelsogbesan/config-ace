@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "parcel build index.html",
+    "predeploy": "parcel build index.html",
+    "deploy": "gh-pages -d build",
     "start": "parcel index.html"
   },
   "repository": {
@@ -17,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/samuelsogbesan/easy-config/issues"
   },
-  "homepage": "https://github.com/samuelsogbesan/easy-config#readme",
+  "homepage": "https://github.com/samuelsogbesan/easy-config",
   "dependencies": {
     "local-storage": "^2.0.0"
   },
