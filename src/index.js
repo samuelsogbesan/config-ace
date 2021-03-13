@@ -13,20 +13,23 @@ document.body.onload = event => {
 
   // Listen for key inputs
   document.body.addEventListener('keydown', ({code}) => {
-    let bindCode;
-    try {
-      bindCode = keyToBind(code);
-      const keyElement = getKey(bindCode);
-      keyElement.click();
-    } catch (err) {
-      throw err;
+    let focusedElement = document.activeElement;
+    if (focusedElement.id !== 'command-value-input') {
+      let bindCode;
+      try {
+        bindCode = keyToBind(code);
+        const keyElement = getKey(bindCode);
+        keyElement.click();
+      } catch (err) {
+        throw err;
+      }
     }
   });
 
   const resultsContainer = document.getElementById('search-results');
   resultsContainer.addEventListener('click', event => {
-    document.getElementById('search-results-submit').click();
-    UIManagementTools.closeTray();
+    document.getElementById('command-value-input').classList.remove('hidden');
+    document.getElementById('command-value-input').focus();
   });
 
   // When People Click a Search Result
@@ -34,12 +37,15 @@ document.body.onload = event => {
   resultsForm.addEventListener('submit', event => {
     event.preventDefault();
     const bindCode = QueryState.getState();
-    const command = new FormData(event.target).get('result');
+    let formData = new FormData(event.target);
+    let command = formData.get('result');
+    let value = formData.get('value');
 
     if (bindCode !== "unbindable") {
-      ConfigState.addBind(bindCode, {command: command, value: 'placeholder'});
+      ConfigState.addBind(bindCode, {command: command, value: value});
       UIManagementTools.refreshBindCounter(bindCode);
       UIManagementTools.flashToast(`${command} Has been bound to ${bindCode}`);
+      UIManagementTools.closeTray();
     }
   });
 
@@ -87,9 +93,18 @@ document.body.onload = event => {
   }
 
   const searchInput = document.getElementById('main-search');
+  const valueInput = document.getElementById('command-value-input');
   searchInput.addEventListener('input', searchHandle);
   searchInput.addEventListener('focusin', searchHandle);
   searchInput.addEventListener('focusout', event => {
+    if (event.explicitOriginalTarget === body) {
+      UIManagementTools.closeTray();
+    }
+
+    UIManagementTools.hintToast(`Hit any key on your keyboard!`);
+  });
+
+  valueInput.addEventListener('focusout', event => {
     if (event.explicitOriginalTarget === body) {
       UIManagementTools.closeTray();
     }
