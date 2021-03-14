@@ -5,3 +5,4 @@
 ## Upcoming Features:
 - An option to load the default CSGO key bindings.
 - An option to add "unbind" / "unbindall" to your config.
+- Access to config presets
