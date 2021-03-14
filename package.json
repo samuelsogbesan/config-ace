@@ -20,7 +20,8 @@
   },
   "homepage": "https://samuelsogbesan.github.io/easy-config",
   "dependencies": {
-    "local-storage": "^2.0.0"
+    "local-storage": "^2.0.0",
+    "parcel-bundler": "1.12.3"
   },
   "devDependencies": {
     "cssnano": "^4.1.10",
