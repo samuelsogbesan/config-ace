@@ -61,20 +61,20 @@ ConfigState.clear = () => setState({});
 /**
  * 
  * @param {*} bindCode
- * @param {*} command on object {commandName, commandValue}
+ * @param {*} newBinding on object {commandName, commandValue}
  * TODO make it update binds
  */
-ConfigState.addBind = (bindCode, command) => { 
+ConfigState.addBind = (bindCode, newBinding) => { 
   let s = ConfigState.getState();
   if (!s[bindCode]) {
     s[bindCode] = [];
   }
 
-  let index = s[bindCode].findIndex(binding => binding.command === command.command);
+  let index = s[bindCode].findIndex(binding => binding.command === newBinding.command);
   if (index >= 0) {
-    s[bindCode][index].value = command.value;
+    s[bindCode][index].value = newBinding.value;
   } else {
-    s[bindCode].push(command);
+    s[bindCode].push(newBinding);
   }
 
   setState(s);
