@@ -32,7 +32,7 @@ document.body.onload = event => {
     document.getElementById('command-value-input').focus();
   });
 
-  // When People Click a Search Result
+  // When A User Submits a Binding.
   const resultsForm = document.getElementById('search-form');
   resultsForm.addEventListener('submit', event => {
     event.preventDefault();
