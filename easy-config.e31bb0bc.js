@@ -564,6 +564,8 @@ var UIManagementTools = {};
 UIManagementTools.closeTray = function () {
   UITargets.Tray.classList.add('hidden');
   UITargets.CommandValueInput.classList.add('hidden');
+  UITargets.Tray.blur();
+  UITargets.CommandValueInput.blur();
 };
 
 UIManagementTools.openTray = function () {
