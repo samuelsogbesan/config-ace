@@ -41,7 +41,10 @@ document.body.onload = event => {
     let command = formData.get('result');
     let value = formData.get('value');
 
-    if (bindCode !== "unbindable") {
+    if (!bindCode) {
+      UIManagementTools.warnToast(`You must select a key to bind '${command}: ${value}' to.`);
+    }
+    else if (bindCode !== "unbindable") {
       ConfigState.addBind(bindCode, {command: command, value: value});
       UIManagementTools.refreshBindCounter(bindCode);
       UIManagementTools.flashToast(`${command} Has been bound to ${bindCode}`);
@@ -111,4 +114,6 @@ document.body.onload = event => {
 
     UIManagementTools.hintToast(`Hit any key on your keyboard!`);
   });
+
+  QueryState.setQuery(null);
 };
