@@ -70,8 +70,13 @@ ConfigState.addBind = (bindCode, command) => {
     s[bindCode] = [];
   }
 
-  // doesnt account for commands that already exist
-  s[bindCode].push(command);
+  let index = s[bindCode].findIndex(binding => binding.command === command.command);
+  if (index >= 0) {
+    s[bindCode][index].value = command.value;
+  } else {
+    s[bindCode].push(command);
+  }
+
   setState(s);
 }
 
