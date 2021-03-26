@@ -8,7 +8,8 @@ const UITargets = {
   Tray: document.getElementById('search-results'),
   InstructionBox: document.getElementById('instruction-box'),
   Keyboard: document.getElementById('keyboard'),
-  CommandValueInput: document.getElementById('command-value-input')
+  CommandValueInput: document.getElementById('command-value-input'),
+  SearchSubmit: document.getElementById('search-results-submit')
 }
 
 const UIManagementTools = {}
@@ -18,9 +19,13 @@ UIManagementTools.closeTray = () => {
   UITargets.CommandValueInput.classList.add('hidden');
   UITargets.Tray.blur();
   UITargets.CommandValueInput.blur();
+  UITargets.SearchSubmit.classList.add('hidden');
 }
 
-UIManagementTools.openTray = () => UITargets.Tray.classList.remove('hidden');
+UIManagementTools.openTray = () => {
+  UITargets.Tray.classList.remove('hidden');
+  UITargets.SearchSubmit.classList.remove('hidden');
+}
 
 UIManagementTools.submitSearch = () => document.getElementById('main-submit').click();
 
