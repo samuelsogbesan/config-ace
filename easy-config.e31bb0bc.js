@@ -565,7 +565,8 @@ var UITargets = {
   Tray: document.getElementById('search-results'),
   InstructionBox: document.getElementById('instruction-box'),
   Keyboard: document.getElementById('keyboard'),
-  CommandValueInput: document.getElementById('command-value-input')
+  CommandValueInput: document.getElementById('command-value-input'),
+  SearchSubmit: document.getElementById('search-results-submit')
 };
 var UIManagementTools = {};
 
@@ -574,10 +575,12 @@ UIManagementTools.closeTray = function () {
   UITargets.CommandValueInput.classList.add('hidden');
   UITargets.Tray.blur();
   UITargets.CommandValueInput.blur();
+  UITargets.SearchSubmit.classList.add('hidden');
 };
 
 UIManagementTools.openTray = function () {
-  return UITargets.Tray.classList.remove('hidden');
+  UITargets.Tray.classList.remove('hidden');
+  UITargets.SearchSubmit.classList.remove('hidden');
 };
 
 UIManagementTools.submitSearch = function () {
@@ -1000,7 +1003,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1761" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51413" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
