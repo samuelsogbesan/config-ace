@@ -1,10 +1,31 @@
+:root {
+  --bg: rgb(41, 41, 44);
+  --text-primary: white;
+  --text-secondary:rgb(212, 209, 209);
+  --background-primary: #181B22;
+  --background-secondary: #535258;
+  --border-primary: #4343465e;
+}
+
+.theme-solarized {
+  --bg: white;
+  --text-primary: #268BD2;
+  --text-secondary: #268BD2;
+  --background-primary: #FDF6E3;
+  --background-secondary: #EEE8D5;
+  --border-primary: #93A1A1;
+}
+
 html {
-  background-color: rgb(41, 41, 44);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+body {
+  background-color: var(--bg);
+}
+
 a {
-  color: white;
+  color: var(--text-primary);
   text-decoration: none;
 }
 
@@ -15,7 +36,7 @@ a {
   justify-content: space-between;
   min-width: calc(50px * 16);
   max-width: calc(50px * 16);
-  background-color: #535258;
+  background-color: var(--background-secondary);
   padding: 1rem;
   border-radius: 1rem;
   box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.14) , 0px 3px 1px -2px rgba(0,0,0,0.12) , 0px 1px 5px 0px rgba(0,0,0,0.2);
@@ -24,9 +45,9 @@ a {
 .keyboard .key {
   flex: 0 0 6.2%;
   height: 50px;
-  background-color: #181B22;
+  background-color: var(--background-primary);
   border: none;
-  color: rgb(212, 209, 209);
+  color: var(--text-secondary);
   border-radius: 5px;
   border: 2px #4343465e solid;
   display: flex;
@@ -100,7 +121,7 @@ a {
 }
 
 .search-nav {
-  background-color: #181B22;
+  background-color: var(--background-primary);
   top: 0;
   padding: 20px;
   position: fixed;
@@ -131,14 +152,14 @@ a {
   border-radius: 2px;
   border: none;
   background-color: rgb(116, 116, 116);
-  color: white;
+  color: var(--text-primary);
   width: 100%;
 }
 
 #search-results {
   display: flex;
   flex-direction: column;
-  color: white;
+  color: var(--text-primary);
   margin: 10px 0;
   overflow-y: scroll;
   max-height: 30vh;
@@ -155,7 +176,7 @@ a {
 #search-results > option > input {
   background: transparent;
   border: none;
-  color: white;
+  color: var(--text-primary);
 }
 
 .bound {
@@ -167,7 +188,7 @@ a {
 }
 
 #current-key {
-  color: white;
+  color: var(--text-primary);
   margin: 0;
   margin-bottom: 10px;
 }
@@ -179,8 +200,8 @@ a {
 }
 
 nav, div, section, header, footer {
-  background-color: #181B22;
-  color: white;
+  background-color: var(--background-primary);
+  color: var(--text-primary);
 }
 
 

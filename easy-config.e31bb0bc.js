@@ -516,20 +516,28 @@ ConfigState.clear = function () {
 /**
  * 
  * @param {*} bindCode
- * @param {*} command on object {commandName, commandValue}
+ * @param {*} newBinding on object {commandName, commandValue}
  * TODO make it update binds
  */
 
 
-ConfigState.addBind = function (bindCode, command) {
+ConfigState.addBind = function (bindCode, newBinding) {
   var s = ConfigState.getState();
 
   if (!s[bindCode]) {
     s[bindCode] = [];
-  } // doesnt account for commands that already exist
+  }
 
+  var index = s[bindCode].findIndex(function (binding) {
+    return binding.command === newBinding.command;
+  });
 
-  s[bindCode].push(command);
+  if (index >= 0) {
+    s[bindCode][index].value = newBinding.value;
+  } else {
+    s[bindCode].push(newBinding);
+  }
+
   setState(s);
 };
 
@@ -880,7 +888,7 @@ document.body.onload = function (event) {
   resultsContainer.addEventListener('click', function (event) {
     document.getElementById('command-value-input').classList.remove('hidden');
     document.getElementById('command-value-input').focus();
-  }); // When People Click a Search Result
+  }); // When A User Submits a Binding.
 
   var resultsForm = document.getElementById('search-form');
   resultsForm.addEventListener('submit', function (event) {
@@ -890,7 +898,9 @@ document.body.onload = function (event) {
     var command = formData.get('result');
     var value = formData.get('value');
 
-    if (bindCode !== "unbindable") {
+    if (!bindCode) {
+      UIManagementTools.warnToast("You must select a key to bind '".concat(command, ": ").concat(value, "' to."));
+    } else if (bindCode !== "unbindable") {
       ConfigState.addBind(bindCode, {
         command: command,
         value: value
@@ -960,6 +970,7 @@ document.body.onload = function (event) {
 
     UIManagementTools.hintToast("Hit any key on your keyboard!");
   });
+  QueryState.setQuery(null);
 };
 },{"./components/Keyboard.js":"components/Keyboard.js","./utils/keyToBind.js":"utils/keyToBind.js","./constants/LAYOUTS.js":"constants/LAYOUTS.js","./utils/command-search":"utils/command-search.js","./state/query":"state/query.js","./state/config.js":"state/config.js","./state/ui.js":"state/ui.js","./utils/getKey.js":"utils/getKey.js"}],"../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -989,7 +1000,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1692" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1761" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
