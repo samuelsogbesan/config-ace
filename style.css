@@ -179,6 +179,10 @@ a {
   width: 100%;
 }
 
+.search::placeholder {
+  color: #BEBEBE;
+}
+
 #search-results {
   display: flex;
   flex-direction: column;
