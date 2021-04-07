@@ -7,6 +7,7 @@ const ConfigState = require('./state/config.js');
 const UIManagementTools = require('./state/ui.js');
 const { getKey } = require('./utils/getKey.js');
 const { save } = require('./utils/save.js');
+const { convert, parse } = require('./utils/parse.js');
 
 document.body.onload = event => {
   // Generate keyboard
@@ -149,6 +150,26 @@ document.body.onload = event => {
   document.getElementById('popup-closer').addEventListener('submit', event => {
     event.preventDefault();
     UIManagementTools.hidePopup();
+  });
+
+  document.getElementById('file-form').addEventListener('submit', event => {
+    event.preventDefault();
+    let formdata = new FormData(event.target);
+    let file = formdata.get("file");
+    let filereader = new FileReader();
+    filereader.readAsText(file);
+    filereader.onloadend = () => {
+      // read and process file
+      let res = filereader.result;
+      let rawBinds = parse(res);
+      let binds = convert(rawBinds);
+
+      // cache file parts.
+      Object.keys(binds).forEach(bindCode => {
+        binds[bindCode].forEach(bind => ConfigState.addBind(bindCode, bind));
+        UIManagementTools.refreshBindCounter(bindCode);
+      });
+    }
   });
 
   QueryState.setQuery(null);
