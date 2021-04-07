@@ -1,3 +1,4 @@
+import 'regenerator-runtime/runtime';
 const Keyboard = require('./components/Keyboard.js');
 const keyToBind = require('./utils/keyToBind.js');
 const layouts = require('./constants/LAYOUTS.js');
@@ -6,6 +7,7 @@ const QueryState = require('./state/query');
 const ConfigState = require('./state/config.js');
 const UIManagementTools = require('./state/ui.js');
 const { getKey } = require('./utils/getKey.js');
+const { save } = require('./utils/save.js');
 
 document.body.onload = event => {
   // Generate keyboard
@@ -113,6 +115,11 @@ document.body.onload = event => {
     }
 
     UIManagementTools.hintToast(`Hit any key on your keyboard!`);
+  });
+
+  document.getElementById('footer-save-submit').addEventListener('submit', async event => {
+    event.preventDefault();
+    save();
   });
 
   QueryState.setQuery(null);
