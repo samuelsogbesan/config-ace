@@ -562,27 +562,42 @@ var QueryState = require('./query');
 
 
 var UITargets = {
-  Tray: document.getElementById('search-results'),
+  ResultsContainer: document.getElementById('search-form-results-container'),
+  SearchResultsTarget: document.getElementById('search-results'),
   InstructionBox: document.getElementById('instruction-box'),
   Keyboard: document.getElementById('keyboard'),
-  CommandValueInput: document.getElementById('command-value-input'),
+  CommandValueInput: document.getElementById('search-form-value-container'),
   SearchSubmitContainer: document.getElementById('search-form-submit-container'),
   ContentBlocker: document.getElementById('content-blocker'),
+  DeleteButton: document.getElementById('search-results-submit-delete'),
   Popup: document.getElementById('popup')
 };
 var UIManagementTools = {};
 
 UIManagementTools.closeTray = function () {
-  UITargets.Tray.classList.add('hidden');
+  UITargets.ResultsContainer.classList.add('hidden');
   UITargets.CommandValueInput.classList.add('hidden');
-  UITargets.Tray.blur();
+  UITargets.ResultsContainer.blur();
   UITargets.CommandValueInput.blur();
   UITargets.SearchSubmitContainer.classList.add('hidden');
 };
 
+UIManagementTools.showElement = function (selector) {
+  var focus = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  var e = document.querySelector(selector);
+  e.classList.remove('hidden');
+  if (focus) e.focus();
+};
+
+UIManagementTools.hideElement = function (selector) {
+  document.querySelector(selector).classList.add('hidden');
+};
+
 UIManagementTools.openTray = function () {
-  UITargets.Tray.classList.remove('hidden');
+  UITargets.ResultsContainer.classList.remove('hidden');
   UITargets.SearchSubmitContainer.classList.remove('hidden');
+  UITargets.SearchResultsTarget.blur();
+  UITargets.DeleteButton.disabled = true;
 };
 
 UIManagementTools.submitSearch = function () {
@@ -658,7 +673,7 @@ UIManagementTools.refreshSearchResults = function (results) {
   var effect = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function (result) {
     var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document.createElement('option');
   };
-  var resultsContainer = UITargets.Tray;
+  var resultsContainer = UITargets.SearchResultsTarget;
   resultsContainer.innerHTML = '';
 
   for (var i = 0; i < results.length; i++) {
@@ -931,8 +946,7 @@ document.body.onload = function (event) {
   });
   var resultsContainer = document.getElementById('search-results');
   resultsContainer.addEventListener('click', function (event) {
-    document.getElementById('command-value-input').classList.remove('hidden');
-    document.getElementById('command-value-input').focus(); // Lil bit hackky since it uses the CSS to correlate state.
+    UIManagementTools.showElement('#search-form-value-container', true); // Lil bit hackky since it uses the CSS to correlate state.
 
     var isBoundOption = event.target.classList.contains("bound");
 
@@ -1017,11 +1031,10 @@ document.body.onload = function (event) {
     UIManagementTools.refreshSearchResults(results, function (result, element) {
       if (BoundCommandSet.has(result)) element.classList.add('bound');
     });
+    UIManagementTools.openTray();
 
     if (results.length === 0) {
-      UIManagementTools.closeTray();
-    } else {
-      UIManagementTools.openTray();
+      UIManagementTools.hideElement('#search-form-value-container');
     }
 
     return false;

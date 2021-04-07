@@ -208,6 +208,19 @@ a {
   cursor: pointer;
 }
 
+#search-results:empty {
+  display: none;
+}
+
+#search-results+i {
+  display: none;
+}
+
+#search-results:empty+i{
+  display: block;
+  opacity: 0.5;
+}
+
 #search-results > option > input {
   background: transparent;
   border: none;
@@ -304,6 +317,14 @@ ol {
   opacity: 0.4;
   z-index: 2;
   background-color: var(--background-secondary);
+}
+
+label {
+  display: block;
+  padding-bottom: 10px;
+  text-decoration: underline;
+  text-decoration-color: var(--background-secondary);
+  text-underline-offset: 5px;
 }
 
 @media only screen and (max-width: calc(50px * 16)) {
