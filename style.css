@@ -58,7 +58,7 @@ a {
   animation: LED 3s infinite;
 }
 
-.keyboard .key {
+.key {
   flex: 0 0 6.2%;
   height: 50px;
   background-color: var(--background-primary);
@@ -73,21 +73,25 @@ a {
   position: relative;
 }
 
+.save-key {
+  background-color: green;
+}
+
 @keyframes clicked {
   0% {opacity: 1;}
   50% {opacity: 0.8;}
   100% {opacity: 1;}
 }
 
-.keyboard .key.clicked {
+.key.clicked {
   animation: clicked 300ms;
 }
 
-.keyboard .key[data-bindcode2]:not([data-bindcode2=""]) {
+.key[data-bindcode2]:not([data-bindcode2=""]) {
   justify-content: start;
 }
 
-.keyboard .key[data-bindcount]::after {
+.key[data-bindcount]::after {
   content: attr(data-bindcount);
   display: flex;
   flex-direction: column;
@@ -104,24 +108,24 @@ a {
   font-weight: bold;
 }
 
-.keyboard .key[data-bindcode="capslock"] {
+.key[data-bindcode="capslock"] {
   flex-basis: 10.85%;
 }
 
-.keyboard .key[data-bindcode="enter"] {
+.key[data-bindcode="enter"] {
   flex-basis: 12.4%;
 }
 
-.keyboard .key[data-bindcode="shift"], .keyboard .key[data-bindcode="rshift"] {
+.key[data-bindcode="shift"], .key[data-bindcode="rshift"] {
   flex-basis: 15%;
 }
 
-.keyboard .key[data-bindcode="space"] {
+.key[data-bindcode="space"] {
   flex-basis: 31%;
   flex-grow: 1;
 }
 
-.keyboard .key[data-bindcode="tab"], .keyboard .key[data-bindcode="backspace"]{
+.key[data-bindcode="tab"], .key[data-bindcode="backspace"]{
   flex-basis: 9.3%;
 }
 
@@ -152,13 +156,14 @@ a {
   border-radius: 5px;
   box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.14) , 0px 3px 1px -2px rgba(0,0,0,0.12) , 0px 1px 5px 0px rgba(0,0,0,0.2);
   z-index: 1;
-  max-width: calc(50px * 16);
-  min-width: calc(50px * 16);
+  max-width: 60vw;
+  width: calc(50px * 16);
 }
 
 .footer {
   position: fixed;
   bottom: 0;
+  max-width: 60vw;
   width: calc(50px * 16);
   margin-bottom: 20px;
   padding: 20px;
@@ -233,4 +238,26 @@ a {
 nav, div, section, header, footer {
   background-color: var(--background-primary);
   color: var(--text-primary);
+}
+
+@media only screen and (max-width: 600px) {
+  #search-results-submit {
+    align-self: center;
+  }
+
+  .search-nav {
+    min-width: 60vw;
+    max-width: 60vw;
+  }
+
+  .keyboard {
+    min-width: calc(50px + 30px);
+    max-width: calc(50px + 30px);
+    height: calc(50px*5);
+    overflow-y: scroll;
+  }
+
+  .key {
+    flex: 0 0 100% !important;
+  }
 }
