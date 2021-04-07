@@ -245,6 +245,15 @@ nav, div, section, header, footer {
   color: var(--text-primary);
 }
 
+#footer-save-submit {
+  display: flex;
+  width: 50px;
+}
+
+#footer-save-submit .key{
+  flex: 0 0 100%;
+}
+
 @media only screen and (max-width: 600px) {
   #search-results-submit {
     align-self: center;
