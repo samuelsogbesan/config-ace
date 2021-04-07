@@ -285,6 +285,10 @@ nav, div, section, header, footer {
   overflow-y: scroll;
 }
 
+#popup-closer input[type="submit"] {
+  float: right;
+}
+
 ol {
   display: flex;
   flex-direction: column;
