@@ -97,7 +97,6 @@ document.body.onload = event => {
   }
 
   const searchInput = document.getElementById('main-search');
-  const valueInput = document.getElementById('command-value-input');
   searchInput.addEventListener('input', searchHandle);
   searchInput.addEventListener('focusin', searchHandle);
 
