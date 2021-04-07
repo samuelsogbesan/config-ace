@@ -71,6 +71,11 @@ a {
   justify-content: center;
   align-items: center;
   position: relative;
+  cursor: pointer;
+}
+
+.key:hover {
+  opacity: 0.95;
 }
 
 .save-key {
