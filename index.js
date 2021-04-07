@@ -100,19 +100,12 @@ document.body.onload = event => {
   const valueInput = document.getElementById('command-value-input');
   searchInput.addEventListener('input', searchHandle);
   searchInput.addEventListener('focusin', searchHandle);
-  searchInput.addEventListener('focusout', event => {
-    if (event.explicitOriginalTarget === body) {
-      UIManagementTools.closeTray();
-    }
-
-    UIManagementTools.hintToast(`Hit any key on your keyboard!`);
-  });
 
   resultsForm.addEventListener('focusout', event => {
-    /*
-    if (event.explicitOriginalTarget === body) {
+    console.log(event.relatedTarget)
+    if (event.relatedTarget === null) {
       UIManagementTools.closeTray();
-    }*/
+    }
 
     UIManagementTools.hintToast(`Hit any key on your keyboard!`);
   });
