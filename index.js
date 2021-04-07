@@ -31,6 +31,13 @@ document.body.onload = event => {
   resultsContainer.addEventListener('click', event => {
     document.getElementById('command-value-input').classList.remove('hidden');
     document.getElementById('command-value-input').focus();
+    
+    // Lil bit hackky since it uses the CSS to correlate state.
+    if (event.target.classList.contains("bound")) {
+      document.getElementById('search-results-submit-delete').disabled = false;
+    } else if (document.getElementById('search-results-submit-delete').disabled === false) {
+      document.getElementById('search-results-submit-delete').disabled = true;
+    }
   });
 
   // When A User Submits a Binding.
