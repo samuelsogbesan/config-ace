@@ -214,7 +214,7 @@ a {
   color: var(--text-primary);
 }
 
-#search-results-submit {
+.secondary-submit {
   align-self: flex-start;
   border-radius: 5px;
 }
