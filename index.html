@@ -41,9 +41,17 @@
   <header class="search-nav">
     <h1 id="current-key" class="hidden"></h1>
     <form id="search-form">
-      <input id="main-search" name="search" class="search" type="search" placeholder="Search for a command... 🔍" autocomplete="off">
-      <select name="result" id="search-results" size=10 class="hidden" required></select>
-      <input id="command-value-input" name="value" class="search hidden" type="search" placeholder="Provide a value... 🔍 (optional)" autocomplete="off">
+        <input id="main-search" name="search" class="search" type="search" placeholder="Search for a command... 🔍" autocomplete="off">
+      
+      <div id="search-form-results-container" class="hidden">
+        <label class="results-label" for="value">Select a command</label>
+        <select name="result" id="search-results" size=10 required></select>
+        <i>no results</i>
+      </div>
+      <div id="search-form-value-container" class="hidden">
+        <label for="value">Give a value for the command</label>
+        <input id="command-value-input" name="value" class="search" type="search" placeholder="Provide a value... 🔍 (optional)" autocomplete="off">
+      </div>
       <div id="search-form-submit-container" class="hidden">
         <input id="search-results-submit" class="secondary-submit" name="create" type="submit" value="Create/Update Bind">
         <input id="search-results-submit-delete" class="secondary-submit" name="delete" type="submit" disabled="true" value="Delete Bind">
