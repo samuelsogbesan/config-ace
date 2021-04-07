@@ -208,6 +208,19 @@ a {
   cursor: pointer;
 }
 
+#search-results:empty {
+  display: none;
+}
+
+#search-results+i {
+  display: none;
+}
+
+#search-results:empty+i{
+  display: block;
+  opacity: 0.5;
+}
+
 #search-results > option > input {
   background: transparent;
   border: none;
