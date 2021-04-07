@@ -221,6 +221,10 @@ a {
   opacity: 0.5;
 }
 
+input[type="submit"] {
+  cursor: pointer;
+}
+
 #search-results > option > input {
   background: transparent;
   border: none;
