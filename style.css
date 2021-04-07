@@ -160,7 +160,6 @@ a {
   margin-top: 20px;
   border-radius: 5px;
   box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.14) , 0px 3px 1px -2px rgba(0,0,0,0.12) , 0px 1px 5px 0px rgba(0,0,0,0.2);
-  z-index: 1;
   max-width: 60vw;
   width: calc(50px * 16);
 }
@@ -243,6 +242,7 @@ a {
 nav, div, section, header, footer {
   background-color: var(--background-primary);
   color: var(--text-primary);
+  z-index: 1;
 }
 
 #footer-save-submit {
@@ -254,7 +254,55 @@ nav, div, section, header, footer {
   flex: 0 0 100%;
 }
 
-@media only screen and (max-width: 600px) {
+#help-form {
+  z-index: 2;
+}
+
+#help-form input[type="submit"]{
+  background: var(--background-primary);
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  width: 2rem;
+  border-radius: 1rem;
+  transform: scale(1.5);
+  box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.14) , 0px 3px 1px -2px rgba(0,0,0,0.12) , 0px 1px 5px 0px rgba(0,0,0,0.2);
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+}
+
+#popup {
+  min-width: 50vw;
+  min-height: 50vh;
+  max-width: 50vw;
+  max-height: 50vh;
+  position: fixed;
+  z-index: 3;
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.14) , 0px 3px 1px -2px rgba(0,0,0,0.12) , 0px 1px 5px 0px rgba(0,0,0,0.2);
+  overflow-y: scroll;
+}
+
+ol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#content-blocker {
+  position: fixed;
+  max-width: 100vw;
+  max-height: 100vh;
+  min-width: 100vw;
+  min-height: 100vh;
+  opacity: 0.4;
+  z-index: 2;
+  background-color: var(--background-secondary);
+}
+
+@media only screen and (max-width: calc(50px * 16)) {
   #search-results-submit {
     align-self: center;
   }
