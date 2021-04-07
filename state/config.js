@@ -46,11 +46,11 @@ ConfigState.removeBindAll = (bindCode) => {
 ConfigState.removeBind = (bindCode, commandToRemove) => {
   let s = ConfigState.getState();
   if (s[bindCode]) {
-    const index = s[bindCode].findIndex(value => s[bindCode].command === commandToRemove.command);
+    const index = s[bindCode].findIndex(value => value.command === commandToRemove);
     if (index >= 0) {
-      s[bindCode] = s[bindCode].splice(index, 1);
+      s[bindCode] = s[bindCode].splice(0, index).concat(s[bindCode].splice(index+1, s[bindCode].length));
       setState(s);
-    } 
+    }
   } else {
     throw new Error(`${bindCode} is not a valid bind code.`);
   }
