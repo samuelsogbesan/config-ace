@@ -27,10 +27,12 @@ const Keyboard = (layout, element = document.createElement('form')) => {
       save();
       return;
     } else if (keyElement.value === '!❌') {
-      UIManagementTools.clearBindCounters();
-      UIManagementTools.warnToast('Config Cleared!');
-      UIManagementTools.closeTray();
-      ConfigState.clear();
+      if(confirm("Are you sure you want to clear all your binds? Your changes will be lost!")) {
+        UIManagementTools.clearBindCounters();
+        UIManagementTools.warnToast('Config Cleared!');
+        UIManagementTools.closeTray();
+        ConfigState.clear();
+      }
     }
 
     const searchInput = document.getElementById('main-search');
