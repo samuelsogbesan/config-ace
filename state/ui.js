@@ -5,28 +5,42 @@ const QueryState = require('./query');
  * Basic UI Manager
  */
 const UITargets = {
-  Tray: document.getElementById('search-results'),
+  ResultsContainer: document.getElementById('search-form-results-container'),
+  SearchResultsTarget: document.getElementById('search-results'),
   InstructionBox: document.getElementById('instruction-box'),
   Keyboard: document.getElementById('keyboard'),
-  CommandValueInput: document.getElementById('command-value-input'),
+  CommandValueInput: document.getElementById('search-form-value-container'),
   SearchSubmitContainer: document.getElementById('search-form-submit-container'),
   ContentBlocker: document.getElementById('content-blocker'),
+  DeleteButton: document.getElementById('search-results-submit-delete'),
   Popup: document.getElementById('popup')
 }
 
 const UIManagementTools = {}
 
 UIManagementTools.closeTray = () => {
-  UITargets.Tray.classList.add('hidden');
+  UITargets.ResultsContainer.classList.add('hidden');
   UITargets.CommandValueInput.classList.add('hidden');
-  UITargets.Tray.blur();
+  UITargets.ResultsContainer.blur();
   UITargets.CommandValueInput.blur();
   UITargets.SearchSubmitContainer.classList.add('hidden');
 }
 
+UIManagementTools.showElement = (selector, focus=false) => {
+  let e = document.querySelector(selector)
+  e.classList.remove('hidden');
+  if (focus) e.focus();
+}
+
+UIManagementTools.hideElement = selector => {
+  document.querySelector(selector).classList.add('hidden');
+}
+
 UIManagementTools.openTray = () => {
-  UITargets.Tray.classList.remove('hidden');
+  UITargets.ResultsContainer.classList.remove('hidden');
   UITargets.SearchSubmitContainer.classList.remove('hidden');
+  UITargets.SearchResultsTarget.blur();
+  UITargets.DeleteButton.disabled = true;
 }
 
 UIManagementTools.submitSearch = () => document.getElementById('main-submit').click();
@@ -93,7 +107,7 @@ UIManagementTools.clearBindCounters = () => {
  * @param {*} effect a side effect to call on each result on creation. Useful for modifying results against some criteria.
  */
 UIManagementTools.refreshSearchResults = (results, effect = (result, option = document.createElement('option')) => {}) => {
-  let resultsContainer = UITargets.Tray;
+  let resultsContainer = UITargets.SearchResultsTarget;
   resultsContainer.innerHTML = '';
 
   for (var i = 0; i < results.length; i++) {
