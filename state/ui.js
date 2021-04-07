@@ -9,7 +9,7 @@ const UITargets = {
   InstructionBox: document.getElementById('instruction-box'),
   Keyboard: document.getElementById('keyboard'),
   CommandValueInput: document.getElementById('command-value-input'),
-  SearchSubmit: document.getElementById('search-results-submit'),
+  SearchSubmitContainer: document.getElementById('search-form-submit-container'),
   ContentBlocker: document.getElementById('content-blocker'),
   Popup: document.getElementById('popup')
 }
@@ -21,12 +21,12 @@ UIManagementTools.closeTray = () => {
   UITargets.CommandValueInput.classList.add('hidden');
   UITargets.Tray.blur();
   UITargets.CommandValueInput.blur();
-  UITargets.SearchSubmit.classList.add('hidden');
+  UITargets.SearchSubmitContainer.classList.add('hidden');
 }
 
 UIManagementTools.openTray = () => {
   UITargets.Tray.classList.remove('hidden');
-  UITargets.SearchSubmit.classList.remove('hidden');
+  UITargets.SearchSubmitContainer.classList.remove('hidden');
 }
 
 UIManagementTools.submitSearch = () => document.getElementById('main-submit').click();
@@ -57,7 +57,11 @@ UIManagementTools.refreshBindCounter = (bind) => {
     const bindCount = binds.length;
     const selector = `.key[data-bindcode="${bind}"]`;
     const keyElement = document.querySelector(selector);
-    keyElement.setAttribute('data-bindcount', bindCount);
+    if (bindCount > 0) {
+      keyElement.setAttribute('data-bindcount', bindCount);
+    } else {
+      keyElement.removeAttribute('data-bindcount');
+    }
   }
 }
 
