@@ -33,10 +33,19 @@ document.body.onload = event => {
     document.getElementById('command-value-input').focus();
     
     // Lil bit hackky since it uses the CSS to correlate state.
-    if (event.target.classList.contains("bound")) {
+    let isBoundOption = event.target.classList.contains("bound");
+    if (isBoundOption) {
       document.getElementById('search-results-submit-delete').disabled = false;
     } else if (document.getElementById('search-results-submit-delete').disabled === false) {
       document.getElementById('search-results-submit-delete').disabled = true;
+    }
+
+    if (!QueryState.getState()) {
+      UIManagementTools.hintToast(`Don't forget to select a key to bind to. Use your keyboard or the onscreen keyboard to select one.`);
+    } else if (isBoundOption) {
+      UIManagementTools.hintToast(`You can update your bind with a new value, or you can go ahead and delete it.`);
+    } else {
+      UIManagementTools.hintToast(`Choose a value for the command, otherwise go ahead and click create!`);
     }
   });
 
