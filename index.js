@@ -108,10 +108,11 @@ document.body.onload = event => {
     UIManagementTools.hintToast(`Hit any key on your keyboard!`);
   });
 
-  valueInput.addEventListener('focusout', event => {
+  resultsForm.addEventListener('focusout', event => {
+    /*
     if (event.explicitOriginalTarget === body) {
       UIManagementTools.closeTray();
-    }
+    }*/
 
     UIManagementTools.hintToast(`Hit any key on your keyboard!`);
   });
