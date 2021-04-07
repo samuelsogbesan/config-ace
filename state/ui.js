@@ -9,7 +9,9 @@ const UITargets = {
   InstructionBox: document.getElementById('instruction-box'),
   Keyboard: document.getElementById('keyboard'),
   CommandValueInput: document.getElementById('command-value-input'),
-  SearchSubmit: document.getElementById('search-results-submit')
+  SearchSubmit: document.getElementById('search-results-submit'),
+  ContentBlocker: document.getElementById('content-blocker'),
+  Popup: document.getElementById('popup')
 }
 
 const UIManagementTools = {}
@@ -57,6 +59,19 @@ UIManagementTools.refreshBindCounter = (bind) => {
     const keyElement = document.querySelector(selector);
     keyElement.setAttribute('data-bindcount', bindCount);
   }
+}
+
+UIManagementTools.showPopup = ({stubborn}) => {
+  UITargets.Popup.classList.remove('hidden');
+
+  if (stubborn) {
+    UITargets.ContentBlocker.classList.remove('hidden');
+  }
+}
+
+UIManagementTools.hidePopup = () => {
+  UITargets.Popup.classList.add('hidden');
+  UITargets.ContentBlocker.classList.add('hidden');
 }
 
 UIManagementTools.clearBindCounters = () => {
