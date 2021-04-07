@@ -102,7 +102,6 @@ document.body.onload = event => {
   searchInput.addEventListener('focusin', searchHandle);
 
   resultsForm.addEventListener('focusout', event => {
-    console.log(event.relatedTarget)
     if (event.relatedTarget === null) {
       UIManagementTools.closeTray();
     }
