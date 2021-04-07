@@ -1,6 +1,6 @@
 const ConfigState = require("../state/config");
 
-export const save = async () => {
+export const save = () => {
   const blobParts = ConfigState.export();
   blobParts.unshift('// Config Courtesy of "Easy Config", a CSGO Config Generator by @sam.sog 🥳\n');
   const file = new Blob(blobParts, {endings: 'native'});

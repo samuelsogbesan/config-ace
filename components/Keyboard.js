@@ -16,7 +16,7 @@ const Keyboard = (layout, element = document.createElement('form')) => {
     Key(layout[i], element);
   }
 
-  element.addEventListener('submit', async (event) => {
+  element.addEventListener('submit', (event) => {
     event.preventDefault();
     event.stopPropagation();
     event.stopImmediatePropagation();
@@ -24,7 +24,7 @@ const Keyboard = (layout, element = document.createElement('form')) => {
     const keyElement = event.submitter;
 
     if (keyElement.value === '!💾') {
-      await save();
+      save();
       return;
     } else if (keyElement.value === '!❌') {
       UIManagementTools.clearBindCounters();

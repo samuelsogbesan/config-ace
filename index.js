@@ -1,4 +1,3 @@
-import 'regenerator-runtime/runtime';
 const Keyboard = require('./components/Keyboard.js');
 const keyToBind = require('./utils/keyToBind.js');
 const layouts = require('./constants/LAYOUTS.js');
@@ -117,7 +116,7 @@ document.body.onload = event => {
     UIManagementTools.hintToast(`Hit any key on your keyboard!`);
   });
 
-  document.getElementById('footer-save-submit').addEventListener('submit', async event => {
+  document.getElementById('footer-save-submit').addEventListener('submit', event => {
     event.preventDefault();
     save();
   });
