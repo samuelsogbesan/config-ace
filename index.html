@@ -10,6 +10,34 @@
   <link rel="manifest" href="site.webmanifest">
 </head>
 <body class="container" id="body">
+  <form id="help-form">
+    <input type="submit" value="?">
+  </form>
+
+  <div id="content-blocker" class="hidden"></div>
+  <div id="popup" class="hidden">
+    <form id="popup-closer"><input type="submit" value="X"></form>
+    <h1>Config Ace ✪</h1>
+
+    <h2>Binding a Key to a Command</h2>
+    <ol>
+      <li>Click any key on screen or select a key on your keyboard.</li>
+      <li>Choose any command from the command menu (e.g. <i>cl_crosshair_style</i>).</li>
+      <li>Optionally, provide a value you want this command to take (e.g. 3)</li>
+      <li>Click the button (or the Enter key) to save.</li>
+    </ol>
+    <aside>You can <b>update</b> any bind by selecting the key it is bound to and clicking on it again.</aside>
+    <br>
+    <aside>You can <b>delete</b> all binds using the X key, or by clicking the delete button in the command menu.</aside>
+
+    <h2>Creating the config (.cfg) file</h2>
+    <ol>
+      <li>Click any of the 💾 buttons to directly export to a config file.</li>
+    </ol>
+
+    <span>Have a suggestion? Create a <a href="https://google.com">GitHub Issue</a></span>
+  </div>
+
   <header class="search-nav">
     <h1 id="current-key" class="hidden"></h1>
     <form id="search-form">
