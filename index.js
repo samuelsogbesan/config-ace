@@ -113,5 +113,15 @@ document.body.onload = event => {
     save();
   });
 
+  document.getElementById('help-form').addEventListener('submit', event => {
+    event.preventDefault();
+    UIManagementTools.showPopup({stubborn: true});
+  });
+
+  document.getElementById('popup-closer').addEventListener('submit', event => {
+    event.preventDefault();
+    UIManagementTools.hidePopup();
+  });
+
   QueryState.setQuery(null);
 };
