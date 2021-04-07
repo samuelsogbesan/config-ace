@@ -42,13 +42,26 @@ document.body.onload = event => {
     let command = formData.get('result');
     let value = formData.get('value');
 
+    let submitter = event.submitter;
+
     if (!bindCode) {
       UIManagementTools.warnToast(`You must select a key to bind '${command}: ${value}' to.`);
     }
     else if (bindCode !== "unbindable") {
-      ConfigState.addBind(bindCode, {command: command, value: value});
+      switch(submitter.getAttribute('name')) {
+        case 'delete':
+          ConfigState.removeBind(bindCode, command);
+          UIManagementTools.flashToast(`${command} Has been unbound from ${bindCode}`);
+          break;
+        case 'create':
+          ConfigState.addBind(bindCode, {command: command, value: value});
+          UIManagementTools.flashToast(`${command} Has been bound to ${bindCode}`);
+          break;
+        default:
+          throw new Error('Unknown Submitter');
+      }
+
       UIManagementTools.refreshBindCounter(bindCode);
-      UIManagementTools.flashToast(`${command} Has been bound to ${bindCode}`);
       UIManagementTools.closeTray();
     }
   });
@@ -124,4 +137,6 @@ document.body.onload = event => {
   });
 
   QueryState.setQuery(null);
+
+  UIManagementTools.showPopup({stubborn: true});
 };
