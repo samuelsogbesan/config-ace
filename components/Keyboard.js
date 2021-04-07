@@ -3,6 +3,7 @@ const Key = require('./Key');
 const fs = require('fs');
 const ConfigState = require('../state/config');
 const UIManagementTools = require('../state/ui');
+const { save } = require('../utils/save');
 
 /**
  * Creates a DOMElement that represents a keyboard.
@@ -15,7 +16,7 @@ const Keyboard = (layout, element = document.createElement('form')) => {
     Key(layout[i], element);
   }
 
-  element.addEventListener('submit', (event) => {
+  element.addEventListener('submit', async (event) => {
     event.preventDefault();
     event.stopPropagation();
     event.stopImmediatePropagation();
@@ -23,13 +24,7 @@ const Keyboard = (layout, element = document.createElement('form')) => {
     const keyElement = event.submitter;
 
     if (keyElement.value === '!💾') {
-      const blobParts = ConfigState.export();
-      blobParts.unshift('// Config Courtesy of "Easy Config", a CSGO Config Generator by @sam.sog 🥳\n');
-      const file = new Blob(blobParts, {endings: 'native'});
-      const a = document.createElement('a');
-      a.download='config.cfg'
-      a.href = URL.createObjectURL(file);
-      a.click();
+      await save();
       return;
     } else if (keyElement.value === '!❌') {
       UIManagementTools.clearBindCounters();
