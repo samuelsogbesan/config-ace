@@ -29,8 +29,7 @@ document.body.onload = event => {
 
   const resultsContainer = document.getElementById('search-results');
   resultsContainer.addEventListener('click', event => {
-    document.getElementById('command-value-input').classList.remove('hidden');
-    document.getElementById('command-value-input').focus();
+    UIManagementTools.showElement('#search-form-value-container', true);
     
     // Lil bit hackky since it uses the CSS to correlate state.
     let isBoundOption = event.target.classList.contains("bound");
@@ -116,10 +115,10 @@ document.body.onload = event => {
       if (BoundCommandSet.has(result)) element.classList.add('bound');
     });
 
+    UIManagementTools.openTray();
+
     if (results.length === 0) {
-      UIManagementTools.closeTray();
-    } else {
-      UIManagementTools.openTray();
+      UIManagementTools.hideElement('#search-form-value-container');
     }
 
     return false;
