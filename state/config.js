@@ -26,7 +26,6 @@ ConfigState.export = () => {
   Object.keys(s).forEach(bindCode => {
     let bindString = `bind "${bindCode}" "`;
     Object.keys(s[bindCode]).forEach(command => {
-      if (command === "_meta") return;
       bindString = bindString.concat(`${command} ${s[bindCode][command]};`);
     });
     bindString = bindString.concat(`"\n`);
@@ -49,10 +48,14 @@ ConfigState.removeBindAll = (bindCode) => {
 ConfigState.removeBind = (bindCode, commandToRemove) => {
   let s = ConfigState.getState();
   if (s[bindCode]) {
-    if (s[bindCode][commandToRemove]) {
+    console.log(`removing s[${bindCode}][${commandToRemove}]`);
+    if (s[bindCode][commandToRemove] !== undefined) {
       delete s[bindCode][commandToRemove];
-      setState(s);
     }
+
+    if (Object.keys(s[bindCode]).length === 0) delete s[bindCode];
+
+    setState(s);
   } else {
     throw new Error(`No binds connected to ${bindCode}.`);
   }
@@ -69,9 +72,7 @@ ConfigState.clear = () => setState({});
 ConfigState.addBind = (bindCode, newBinding) => { 
   let s = ConfigState.getState();
   if (!s[bindCode]) {
-    s[bindCode] = {
-      _meta: { bindType: 'bind' }
-    };
+    s[bindCode] = {};
   }
 
   //s[bindCode][command];
