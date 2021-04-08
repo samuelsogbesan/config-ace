@@ -10,13 +10,18 @@
   <link rel="manifest" href="site.webmanifest">
 </head>
 <body class="container" id="body">
-  <form id="file-form">
-    <input name="file" type="file" accept=".cfg" required>
-    <input type="submit" value="send file">
-  </form>
-  <form id="help-form">
-    <input type="submit" value="?">
-  </form>
+  <nav id="main-menu">
+    <form id="help-form">
+      <input type="submit" value="?" class="circular-submit">
+    </form>
+    <form id="file-form">
+      <label for="file-upload" class="circular-submit">
+        📤
+        <input id="file-upload" name="file" type="file" class="hidden" accept=".cfg" required>
+      </label>
+      <input id="file-form-submit" type="submit" class="hidden">
+    </form>
+  </nav>
 
   <div id="content-blocker" class="hidden"></div>
   <div id="popup" class="hidden">
