@@ -12,6 +12,7 @@ const UITargets = {
   CommandValueInputContainer: document.getElementById('search-form-value-container'),
   CommandValueInput: document.getElementById('command-value-input'),
   SearchSubmitContainer: document.getElementById('search-form-submit-container'),
+  BindTypeInputContainer: document.getElementById('search-form-bindtype-container'),
   ContentBlocker: document.getElementById('content-blocker'),
   DeleteButton: document.getElementById('search-results-submit-delete'),
   Popup: document.getElementById('popup')
@@ -29,6 +30,7 @@ UIManagementTools.closeTray = () => {
   UITargets.ResultsContainer.blur();
   UITargets.CommandValueInputContainer.blur();
   UITargets.SearchSubmitContainer.classList.add('hidden');
+  UITargets.BindTypeInputContainer.classList.add('hidden');
 }
 
 UIManagementTools.showElement = (selector, focus=false) => {
