@@ -84,6 +84,7 @@ document.body.onload = event => {
       }
 
       UIManagementTools.refreshBindCounter(bindCode);
+      UIManagementTools.refreshPanel(ConfigState.export().join('\n'));
       UIManagementTools.closeTray();
     }
   });
