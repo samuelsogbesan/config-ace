@@ -16,6 +16,8 @@ document.body.onload = event => {
 
   // Listen for key inputs
   document.body.addEventListener('keydown', ({code}) => {
+    if (!document.getElementById('popup').classList.contains('hidden')) return;
+
     let focusedElement = document.activeElement;
     if (focusedElement.id !== 'command-value-input') {
       let bindCode;
