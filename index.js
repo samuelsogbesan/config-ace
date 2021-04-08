@@ -8,6 +8,7 @@ const UIManagementTools = require('./state/ui.js');
 const { getKey } = require('./utils/getKey.js');
 const { save } = require('./utils/save.js');
 const { convert, parse } = require('./utils/parse.js');
+const defaultBindings = require('./constants/defaultBindings.js');
 
 document.body.onload = event => {
   // Generate keyboard
@@ -175,9 +176,19 @@ document.body.onload = event => {
   }
 
   let fileForm = document.getElementById('file-form');
-  document.getElementById('file-upload').addEventListener('change', (e)=> {
+  let fileUpload = document.getElementById('file-upload');
+
+  document.getElementById('default-file-form').addEventListener('submit', e => {
+    e.preventDefault();
+    ConfigState.loadStateDangerously(defaultBindings);
+    Object.keys(defaultBindings).forEach(bindCode => UIManagementTools.refreshBindCounter(bindCode));
+    UIManagementTools.hintToast('Config File Loaded!');
+  });
+
+  fileUpload.addEventListener('change', (e)=> {
     document.getElementById('file-form-submit').click();
   });
+
   fileForm.addEventListener('submit', event => {
     event.preventDefault();
     event.stopImmediatePropagation();
