@@ -32,6 +32,7 @@ document.body.onload = event => {
   const resultsContainer = document.getElementById('search-results');
   resultsContainer.addEventListener('click', event => {
     UIManagementTools.showElement('#search-form-value-container', true);
+    UIManagementTools.showElement('#search-form-bindtype-container');
     
     // Lil bit hackky since it uses the CSS to correlate state.
     let isBoundOption = event.target.classList.contains("bound");
@@ -61,6 +62,7 @@ document.body.onload = event => {
     let formData = new FormData(event.target);
     let command = formData.get('result');
     let value = formData.get('value');
+    let bindtype = formData.get('bindtype');
 
     let submitter = event.submitter;
 
@@ -198,6 +200,14 @@ document.body.onload = event => {
     UIManagementTools.hintToast('Config File Loaded!');
     return false;
   });
+
+  document.getElementById('bindtoggle-option').addEventListener('input', event => {
+    UIManagementTools.showElement('#bindtoggle-warning');
+  });
+
+  document.getElementById('bind-option').addEventListener('input', event => {
+    UIManagementTools.hideElement('#bindtoggle-warning');
+  })
 
   QueryState.setQuery(null);
 
