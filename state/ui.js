@@ -9,7 +9,8 @@ const UITargets = {
   SearchResultsTarget: document.getElementById('search-results'),
   InstructionBox: document.getElementById('instruction-box'),
   Keyboard: document.getElementById('keyboard'),
-  CommandValueInput: document.getElementById('search-form-value-container'),
+  CommandValueInputContainer: document.getElementById('search-form-value-container'),
+  CommandValueInput: document.getElementById('command-value-input'),
   SearchSubmitContainer: document.getElementById('search-form-submit-container'),
   ContentBlocker: document.getElementById('content-blocker'),
   DeleteButton: document.getElementById('search-results-submit-delete'),
@@ -18,11 +19,15 @@ const UITargets = {
 
 const UIManagementTools = {}
 
+UIManagementTools.updateCommandValueInputPrompt = prompt => {
+  UITargets.CommandValueInput.value = prompt;
+}
+
 UIManagementTools.closeTray = () => {
   UITargets.ResultsContainer.classList.add('hidden');
-  UITargets.CommandValueInput.classList.add('hidden');
+  UITargets.CommandValueInputContainer.classList.add('hidden');
   UITargets.ResultsContainer.blur();
-  UITargets.CommandValueInput.blur();
+  UITargets.CommandValueInputContainer.blur();
   UITargets.SearchSubmitContainer.classList.add('hidden');
 }
 
