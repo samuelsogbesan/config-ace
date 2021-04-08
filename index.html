@@ -67,13 +67,14 @@
         <label for="value">Give a value for the command</label>
         <input id="command-value-input" name="value" class="search" type="search" placeholder="Provide a value... 🔍 (optional)" autocomplete="off">
       </div>
-      <div id="search-form-bindtype-container">
+      <div id="search-form-bindtype-container" class="hidden">
         <div class="radio-pill">
-          <input type="radio" id="bind-option" class="hidden" name="bindtype" value="bind">
+          <input type="radio" id="bind-option" class="hidden" name="bindtype" value="bind" checked="true">
           <label for="bind-option">bind</label>
           <input type="radio" id="bindtoggle-option" class="hidden" name="bindtype" value="BindToggle">
           <label for="bindtoggle-option">BindToggle</label>
         </div>
+        <small id="bindtoggle-warning" class="warning hidden">for bindtype BindToggle, the command value you provide will be ignored.</small>
       </div>
       <div id="search-form-submit-container" class="hidden">
         <input id="search-results-submit" class="secondary-submit" name="create" type="submit" value="Create/Update Bind">
@@ -82,7 +83,11 @@
     </form>
   </header>
 
-  <form id='keyboard'></form>
+  <section class="main-section">
+    <textarea class="board" readonly></textarea>
+    <form id='keyboard'></form>
+  </section>
+  
 
   <footer class="footer">
     <div>
