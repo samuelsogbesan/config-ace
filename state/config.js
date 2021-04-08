@@ -93,4 +93,12 @@ ConfigState.swapBind = (bindCode, oldOrder, newOrder) => {
   setState(s);
 }
 
+/**
+ * Only to be used to completely override state with a new valid object.
+ * @param {*} newState 
+ */
+ConfigState.loadStateDangerously = (newState) => {
+  setState(newState);
+}
+
 module.exports = ConfigState;
