@@ -38,7 +38,7 @@ document.body.onload = event => {
     let isBoundOption = event.target.classList.contains("bound");
     if (isBoundOption) {
       document.getElementById('search-results-submit-delete').disabled = false;
-      let commandValue = ConfigState.getBind(QueryState.getState()).find(command => command.command === event.target.value).value;
+      let commandValue = ConfigState.getBind(QueryState.getState())[event.target.value];
       UIManagementTools.updateCommandValueInputPrompt(commandValue.trim());
     } else if (document.getElementById('search-results-submit-delete').disabled === false) {
       document.getElementById('search-results-submit-delete').disabled = true;
@@ -104,9 +104,11 @@ document.body.onload = event => {
 
     let binds = ConfigState.getBind(q);
     if (binds) {
+      console.log(binds)
+      console.log(binds["_autosave"]);
       results.sort((a, b) => {
-        let aBindExists = binds.some(value => value.command === a)//.some(key => binds[key].command === a);
-        let bBindExists = binds.some(value => value.command === b);
+        let aBindExists = binds[a] !== undefined ? true : false; //binds.some(value => value.command === a)//.some(key => binds[key].command === a);
+        let bBindExists = binds[b] !== undefined ? true : false; //binds.some(value => value.command === b);
         
         if (aBindExists) BoundCommandSet.add(a);
         if (bBindExists) BoundCommandSet.add(b);

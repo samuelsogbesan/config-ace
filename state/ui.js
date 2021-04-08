@@ -75,7 +75,7 @@ UIManagementTools.refreshBindCounter = (bind) => {
   let binds = ConfigState.getBind(bind);
 
   if (binds) {
-    const bindCount = binds.length;
+    const bindCount = Object.keys(binds).length;
     const selector = `.key[data-bindcode="${bind}"]`;
     const keyElement = document.querySelector(selector);
     if (bindCount > 0) {

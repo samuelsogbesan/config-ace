@@ -23,10 +23,11 @@ ConfigState.export = () => {
   let s = state();
 
   const binds = [];
-  Object.keys(s).forEach(key => {
-    let bindString = `bind "${key}" "`;
-    s[key].forEach(({command, value}) => { 
-      bindString = bindString.concat(`${command} ${value};`);
+  Object.keys(s).forEach(bindCode => {
+    let bindString = `bind "${bindCode}" "`;
+    Object.keys(s[bindCode]).forEach(command => {
+      if (command === "_meta") return;
+      bindString = bindString.concat(`${command} ${s[bindCode][command]};`);
     });
     bindString = bindString.concat(`"\n`);
     binds.push(bindString);
@@ -35,6 +36,8 @@ ConfigState.export = () => {
 }
 
 ConfigState.getBind = (bindCode) => ConfigState.getState()[bindCode];
+
+ConfigState.getIndividualBind = (bindCode, command) => ConfigState.getState()[bindCode][command];
 
 ConfigState.removeBindAll = (bindCode) => {
   let s = ConfigState.getState();
@@ -46,13 +49,12 @@ ConfigState.removeBindAll = (bindCode) => {
 ConfigState.removeBind = (bindCode, commandToRemove) => {
   let s = ConfigState.getState();
   if (s[bindCode]) {
-    const index = s[bindCode].findIndex(value => value.command === commandToRemove);
-    if (index >= 0) {
-      s[bindCode] = s[bindCode].splice(0, index).concat(s[bindCode].splice(index+1, s[bindCode].length));
+    if (s[bindCode][commandToRemove]) {
+      delete s[bindCode][commandToRemove];
       setState(s);
     }
   } else {
-    throw new Error(`${bindCode} is not a valid bind code.`);
+    throw new Error(`No binds connected to ${bindCode}.`);
   }
 }
 
@@ -67,15 +69,14 @@ ConfigState.clear = () => setState({});
 ConfigState.addBind = (bindCode, newBinding) => { 
   let s = ConfigState.getState();
   if (!s[bindCode]) {
-    s[bindCode] = [];
+    s[bindCode] = {
+      _meta: { bindType: 'bind' }
+    };
   }
 
-  let index = s[bindCode].findIndex(binding => binding.command === newBinding.command);
-  if (index >= 0) {
-    s[bindCode][index].value = newBinding.value;
-  } else {
-    s[bindCode].push(newBinding);
-  }
+  //s[bindCode][command];
+  let command = newBinding.command;
+  s[bindCode][command] = newBinding.value;
 
   setState(s);
 }
