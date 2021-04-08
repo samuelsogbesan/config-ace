@@ -133,7 +133,9 @@ document.body.onload = event => {
   searchInput.addEventListener('input', searchHandle);
   searchInput.addEventListener('focusin', searchHandle);
 
-  resultsForm.addEventListener('focusout', event => {
+  let header = document.querySelector('.search-nav');
+  header.addEventListener('focusout', event => {
+    console.log(event.relatedTarget);
     if (event.relatedTarget === null) {
       UIManagementTools.closeTray();
     }
