@@ -15,7 +15,8 @@ const UITargets = {
   BindTypeInputContainer: document.getElementById('search-form-bindtype-container'),
   ContentBlocker: document.getElementById('content-blocker'),
   DeleteButton: document.getElementById('search-results-submit-delete'),
-  Popup: document.getElementById('popup')
+  Popup: document.getElementById('popup'),
+  ConfigPanel: document.getElementById('config-panel')
 }
 
 const UIManagementTools = {}
@@ -131,6 +132,10 @@ UIManagementTools.refreshSearchResults = (results, effect = (result, option = do
 
   let pageSize = results.length < 10 ? results.length : 10;
   resultsContainer.setAttribute('size', pageSize);
+}
+
+UIManagementTools.refreshPanel = content => {
+  UITargets.ConfigPanel.textContent = content;
 }
 
 module.exports = UIManagementTools;
