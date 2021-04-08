@@ -16,6 +16,46 @@
   --border-primary: #93A1A1;
 }
 
+.flex-row {
+  display: flex;
+}
+
+.spaced-flex-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.radio-pill input[type="radio"]+label {
+  text-decoration: none !important;
+}
+
+hr {
+  margin: 0;
+  height: 1ch;
+}
+
+.radio-pill {
+  display: flex;
+  align-items: center;
+  width: min-content;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+}
+
+input:checked+label{
+  color:green;
+}
+
+.radio-pill input[type="radio"]+label {
+  background-color: var(--background-secondary);
+  padding: 0.25rem 0.5rem !important;
+}
+
+/*
+.radio-pill input[type="radio"]:checked+label::after{
+  content: "for bindtype BindToggle, the command value you provide will be ignored.";
+}*/
+
 html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
@@ -41,6 +81,33 @@ a {
   100% {
     border-color: green;
   }
+}
+
+.main-section {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr calc(50px*16) 1fr;
+  background: transparent;
+  justify-items: center;
+  width: 100%;
+}
+
+.board {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: var(--background-secondary);
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.14) , 0px 3px 1px -2px rgba(0,0,0,0.12) , 0px 1px 5px 0px rgba(0,0,0,0.2);
+  border: 2px black solid;
+  animation: LED 3s infinite;
+  width: 300px;
+}
+
+textarea {
+  resize: none;
 }
 
 .keyboard {
@@ -162,6 +229,7 @@ a {
   box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.14) , 0px 3px 1px -2px rgba(0,0,0,0.12) , 0px 1px 5px 0px rgba(0,0,0,0.2);
   max-width: 60vw;
   width: calc(50px * 16);
+  z-index: 2;
 }
 
 .footer {
