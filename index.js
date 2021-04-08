@@ -214,5 +214,7 @@ document.body.onload = event => {
 
   QueryState.setQuery(null);
 
+  UIManagementTools.refreshPanel(ConfigState.export().join('\n'));
+
   UIManagementTools.showPopup({stubborn: true});
 };
