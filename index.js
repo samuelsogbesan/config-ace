@@ -36,8 +36,11 @@ document.body.onload = event => {
     let isBoundOption = event.target.classList.contains("bound");
     if (isBoundOption) {
       document.getElementById('search-results-submit-delete').disabled = false;
+      let commandValue = ConfigState.getBind(QueryState.getState()).find(command => command.command === event.target.value).value;
+      UIManagementTools.updateCommandValueInputPrompt(commandValue.trim());
     } else if (document.getElementById('search-results-submit-delete').disabled === false) {
       document.getElementById('search-results-submit-delete').disabled = true;
+      UIManagementTools.updateCommandValueInputPrompt('');
     }
 
     if (!QueryState.getState()) {
@@ -152,8 +155,7 @@ document.body.onload = event => {
     UIManagementTools.hidePopup();
   });
 
-  document.getElementById('file-form').addEventListener('submit', event => {
-    event.preventDefault();
+  const fileLoadHandler = event => {
     let formdata = new FormData(event.target);
     let file = formdata.get("file");
     let filereader = new FileReader();
@@ -170,6 +172,18 @@ document.body.onload = event => {
         UIManagementTools.refreshBindCounter(bindCode);
       });
     }
+  }
+
+  let fileForm = document.getElementById('file-form');
+  document.getElementById('file-upload').addEventListener('change', (e)=> {
+    document.getElementById('file-form-submit').click();
+  });
+  fileForm.addEventListener('submit', event => {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    fileLoadHandler(event);
+    UIManagementTools.hintToast('Config File Loaded!');
+    return false;
   });
 
   QueryState.setQuery(null);
