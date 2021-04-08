@@ -67,6 +67,14 @@
         <label for="value">Give a value for the command</label>
         <input id="command-value-input" name="value" class="search" type="search" placeholder="Provide a value... 🔍 (optional)" autocomplete="off">
       </div>
+      <div id="search-form-bindtype-container">
+        <div class="radio-pill">
+          <input type="radio" id="bind-option" class="hidden" name="bindtype" value="bind">
+          <label for="bind-option">bind</label>
+          <input type="radio" id="bindtoggle-option" class="hidden" name="bindtype" value="BindToggle">
+          <label for="bindtoggle-option">BindToggle</label>
+        </div>
+      </div>
       <div id="search-form-submit-container" class="hidden">
         <input id="search-results-submit" class="secondary-submit" name="create" type="submit" value="Create/Update Bind">
         <input id="search-results-submit-delete" class="secondary-submit" name="delete" type="submit" disabled="true" value="Delete Bind">
