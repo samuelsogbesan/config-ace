@@ -32,6 +32,7 @@ const Keyboard = (layout, element = document.createElement('form')) => {
         UIManagementTools.warnToast('Config Cleared!');
         UIManagementTools.closeTray();
         ConfigState.clear();
+        UIManagementTools.refreshPanel('');
       }
     }
 
