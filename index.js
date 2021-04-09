@@ -107,8 +107,6 @@ document.body.onload = event => {
 
     let binds = ConfigState.getBind(q);
     if (binds) {
-      console.log(binds)
-      console.log(binds["_autosave"]);
       results.sort((a, b) => {
         let aBindExists = binds[a] !== undefined ? true : false; //binds.some(value => value.command === a)//.some(key => binds[key].command === a);
         let bBindExists = binds[b] !== undefined ? true : false; //binds.some(value => value.command === b);
@@ -142,7 +140,6 @@ document.body.onload = event => {
 
   let header = document.querySelector('.search-nav');
   header.addEventListener('focusout', event => {
-    console.log(event.relatedTarget);
     if (event.relatedTarget === null) {
       UIManagementTools.closeTray();
     }
