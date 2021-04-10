@@ -30,6 +30,7 @@ UIManagementTools.closeTray = () => {
   UITargets.CommandValueInputContainer.classList.add('hidden');
   UITargets.ResultsContainer.blur();
   UITargets.CommandValueInputContainer.blur();
+  UITargets.BindTypeInputContainer.children[0].children[0].click();
   UITargets.SearchSubmitContainer.classList.add('hidden');
   UITargets.BindTypeInputContainer.classList.add('hidden');
 }
@@ -76,7 +77,7 @@ UIManagementTools.refreshBindCounter = (bind) => {
   let binds = ConfigState.getBind(bind);
 
   if (binds) {
-    const bindCount = Object.keys(binds).length;
+    const bindCount = Object.keys(binds).length-1;
     const selector = `.key[data-bindcode="${bind}"]`;
     const keyElement = document.querySelector(selector);
     if (bindCount > 0) {
