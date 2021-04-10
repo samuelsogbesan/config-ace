@@ -314,6 +314,18 @@ label[for="file-upload"] {
   color: green;
 }
 
+.bound.but-ignored::after {
+  display: inline-block;
+  text-decoration: none;
+  content: "(Ignored due to bind type 'BindToggle')";
+  margin-left: 0.5rem;
+  color: red;
+}
+
+.bound.but-ignored {
+  text-decoration: line-through;
+}
+
 .hidden {
   display: none !important;
 }
