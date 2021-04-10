@@ -64,7 +64,7 @@ document.body.onload = event => {
     let formData = new FormData(event.target);
     let command = formData.get('result');
     let value = formData.get('value');
-    let bindtype = formData.get('bindtype');
+    let bindType = formData.get('bindtype');
 
     let submitter = event.submitter;
 
@@ -79,6 +79,7 @@ document.body.onload = event => {
           break;
         case 'create':
           ConfigState.addBind(bindCode, {command: command, value: value});
+          ConfigState.setBindType(bindCode, bindType);
           UIManagementTools.flashToast(`${command} Has been bound to ${bindCode}`);
           break;
         default:
@@ -205,11 +206,13 @@ document.body.onload = event => {
 
   document.getElementById('bindtoggle-option').addEventListener('input', event => {
     UIManagementTools.showElement('#bindtoggle-warning');
+    document.querySelectorAll('.bound').forEach((element, idx) => { if (idx > 0) element.classList.add('but-ignored'); });
   });
 
   document.getElementById('bind-option').addEventListener('input', event => {
     UIManagementTools.hideElement('#bindtoggle-warning');
-  })
+    document.querySelectorAll('.bound').forEach((element, idx) => { if (idx > 0) element.classList.remove('but-ignored'); });
+  });
 
   QueryState.setQuery(null);
 
