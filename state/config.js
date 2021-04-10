@@ -20,15 +20,26 @@ ConfigState.toString = () => JSON.stringify(state());
  * The binds returned as an array of bind strings.
  */
 ConfigState.export = () => {
-  let s = state();
+  let allBinds = state();
 
   const binds = [];
-  Object.keys(s).forEach(bindCode => {
-    let bindString = `bind "${bindCode}" "`;
-    Object.keys(s[bindCode]).forEach(command => {
-      bindString = bindString.concat(`${command} ${s[bindCode][command]};`);
-    });
-    bindString = bindString.concat(`"\n`);
+  Object.keys(allBinds).forEach(bindCode => {
+    let concatinatedCommands = "";
+    let bindType = allBinds[bindCode]._meta.bindType;
+
+    console.log(allBinds[bindCode])
+    if (bindType === 'BindToggle') {
+      let firstCommand = Object.keys(allBinds[bindCode])[1];
+      console.log(firstCommand)
+      concatinatedCommands = firstCommand;
+    } else {
+      Object.keys(allBinds[bindCode]).forEach(command => {
+        if(command === '_meta') return;
+        else concatinatedCommands = concatinatedCommands.concat(`${command} ${allBinds[bindCode][command]};`);
+      });
+    }
+
+    let bindString = `${bindType} "${bindCode}" ${concatinatedCommands}\n`;
     binds.push(bindString);
   });
   return binds;
@@ -72,12 +83,25 @@ ConfigState.clear = () => setState({});
 ConfigState.addBind = (bindCode, newBinding) => { 
   let s = ConfigState.getState();
   if (!s[bindCode]) {
-    s[bindCode] = {};
+    s[bindCode] = {
+      _meta: {
+        bindType: 'bind',
+        order: Object.keys(state()).length,
+      }
+    };
   }
 
-  //s[bindCode][command];
   let command = newBinding.command;
   s[bindCode][command] = newBinding.value;
+
+  setState(s);
+}
+
+ConfigState.setBindType = (bindCode, bindType) => {
+  let s = ConfigState.getState();
+  if (s[bindCode]) {
+    s[bindCode]._meta.bindType = bindType;
+  }
 
   setState(s);
 }
