@@ -189,7 +189,8 @@ document.body.onload = event => {
     e.preventDefault();
     ConfigState.loadStateDangerously(defaultBindings);
     Object.keys(defaultBindings).forEach(bindCode => UIManagementTools.refreshBindCounter(bindCode));
-    UIManagementTools.hintToast('Config File Loaded!');
+    UIManagementTools.refreshPanel(ConfigState.export().join('\n'));
+    UIManagementTools.hintToast('Loaded the default CSGO Config Bindings!');
   });
 
   fileUpload.addEventListener('change', (e)=> {
@@ -200,7 +201,8 @@ document.body.onload = event => {
     event.preventDefault();
     event.stopImmediatePropagation();
     fileLoadHandler(event);
-    UIManagementTools.hintToast('Config File Loaded!');
+    UIManagementTools.refreshPanel(ConfigState.export().join('\n'));
+    UIManagementTools.hintToast('Your Config File Loaded!');
     return false;
   });
 
