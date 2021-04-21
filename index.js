@@ -179,6 +179,9 @@ document.body.onload = event => {
         binds[bindCode].forEach(bind => ConfigState.addBind(bindCode, bind));
         UIManagementTools.refreshBindCounter(bindCode);
       });
+
+      UIManagementTools.refreshPanel(ConfigState.export().join('\n'));
+      UIManagementTools.hintToast('Your Config File Loaded!');
     }
   }
 
@@ -201,8 +204,6 @@ document.body.onload = event => {
     event.preventDefault();
     event.stopImmediatePropagation();
     fileLoadHandler(event);
-    UIManagementTools.refreshPanel(ConfigState.export().join('\n'));
-    UIManagementTools.hintToast('Your Config File Loaded!');
     return false;
   });
 
