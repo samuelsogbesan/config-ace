@@ -80,10 +80,16 @@ UIManagementTools.refreshBindCounter = (bind) => {
     const bindCount = Object.keys(binds).length-1;
     const selector = `.key[data-bindcode="${bind}"]`;
     const keyElement = document.querySelector(selector);
-    if (bindCount > 0) {
-      keyElement.setAttribute('data-bindcount', bindCount);
+
+    // It is possible that the keybinds rely on characters we do not check for yet.
+    if (keyElement) {
+      if (bindCount > 0) {
+        keyElement.setAttribute('data-bindcount', bindCount);
+      } else {
+        keyElement.removeAttribute('data-bindcount');
+      }
     } else {
-      keyElement.removeAttribute('data-bindcount');
+      console.warn(`We don't currently support viewing binds to "${bind}". UI update coming soon!`);
     }
   }
 }
