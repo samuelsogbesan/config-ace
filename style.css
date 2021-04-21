@@ -442,11 +442,21 @@ ol {
   .keyboard {
     min-width: calc(50px + 30px);
     max-width: calc(50px + 30px);
-    height: calc(50px*5);
+    max-height: calc(50px*7);
     overflow-y: scroll;
   }
 
   .key {
     flex: 0 0 100% !important;
+  }
+
+  .main-section {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  #config-panel {
+    order: 2;
+    height: 150px;
   }
 }
