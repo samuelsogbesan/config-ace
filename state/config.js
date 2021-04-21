@@ -21,21 +21,19 @@ ConfigState.toString = () => JSON.stringify(state());
  */
 ConfigState.export = () => {
   let allBinds = state();
-
   const binds = [];
   Object.keys(allBinds).forEach(bindCode => {
     let concatinatedCommands = "";
     let bindType = allBinds[bindCode]._meta.bindType;
 
-    console.log(allBinds[bindCode])
     if (bindType === 'BindToggle') {
       let firstCommand = Object.keys(allBinds[bindCode])[1];
-      console.log(firstCommand)
-      concatinatedCommands = firstCommand;
+      concatinatedCommands = `${firstCommand};`;
     } else {
       Object.keys(allBinds[bindCode]).forEach(command => {
+        let delimiter = allBinds[bindCode][command] === "" ? "" : " ";
         if(command === '_meta') return;
-        else concatinatedCommands = concatinatedCommands.concat(`${command} ${allBinds[bindCode][command]};`);
+        else concatinatedCommands = concatinatedCommands.concat(`${command}${delimiter}${allBinds[bindCode][command]};`);
       });
     }
 
@@ -59,12 +57,11 @@ ConfigState.removeBindAll = (bindCode) => {
 ConfigState.removeBind = (bindCode, commandToRemove) => {
   let s = ConfigState.getState();
   if (s[bindCode]) {
-    console.log(`removing s[${bindCode}][${commandToRemove}]`);
     if (s[bindCode][commandToRemove] !== undefined) {
       delete s[bindCode][commandToRemove];
     }
 
-    if (Object.keys(s[bindCode]).length === 0) delete s[bindCode];
+    if (Object.keys(s[bindCode]).length === 1) delete s[bindCode];
 
     setState(s);
   } else {
@@ -100,6 +97,9 @@ ConfigState.addBind = (bindCode, newBinding) => {
 ConfigState.setBindType = (bindCode, bindType) => {
   let s = ConfigState.getState();
   if (s[bindCode]) {
+    if (!s[bindCode]._meta) {
+      s[bindCode]._meta = {};
+    }
     s[bindCode]._meta.bindType = bindType;
   }
 
