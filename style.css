@@ -69,6 +69,18 @@ a {
   text-decoration: none;
 }
 
+a:any-link {
+  color: rgb(0, 69, 139);
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+a:any-link::before {
+  display: inline-block;
+  content:"🔗";
+  padding-right: 0.1rem;
+}
+
 @keyframes LED {
   0% {
     border-color: red;
@@ -233,19 +245,48 @@ textarea {
   z-index: 1;
 }
 
+@keyframes flyin {
+  0% {
+    transform: translateY(100%);
+    opacity: 0%;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 100%;
+  }
+}
+
 .footer {
   position: fixed;
   bottom: 0;
   max-width: 60vw;
   width: calc(50px * 16);
   margin-bottom: 20px;
-  padding: 20px;
+  padding: 10px 20px;
   border-radius: 5px;
   box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.14) , 0px 3px 1px -2px rgba(0,0,0,0.12) , 0px 1px 5px 0px rgba(0,0,0,0.2);
   z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: transform 300ms ease-in-out;
+}
+
+button[value="!❌"] {
+  border-color: red;
+  border-width: 2px;
+}
+
+button[value="!💾"] {
+  border-color: gainsboro;
+  border-width: 2px;
+}
+
+.footer.hidden {
+  transition: transform 300ms ease-in-out;
+  transform: translateY(200%);
+  display: flex !important;
 }
 
 .search {
@@ -398,6 +439,20 @@ nav, div, section, header, footer {
   margin-top: -25vh;
   margin-left: -25vw;
   background-color: var(--background-primary);
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: initial;
+  }
+}
+
+#popup:not(.hidden) {
+  animation: fadein 400ms ease-in-out;
 }
 
 #popup-closer input[type="submit"] {
