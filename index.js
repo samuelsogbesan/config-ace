@@ -72,7 +72,8 @@ document.body.onload = event => {
     let submitter = event.submitter;
 
     if (!bindCode) {
-      UIManagementTools.toast(`You must select a key to bind '${command}: ${value}' to.`, 'warn');
+      let delimiter = (value === '' ? '' : ': ');
+      UIManagementTools.toast(`You must select a key to bind '${command}${delimiter}${value}' to.`, 'warn');
     }
     else if (bindCode !== "unbindable") {
       switch(submitter.getAttribute('name')) {
