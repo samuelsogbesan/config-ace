@@ -1,8 +1,10 @@
-# ez config 🌩️ : Generate Fast CSGO Configs 🛹
+# Config Ace 🌩️ CSGO Config Generator 🛹
 
+We're officially live 🎉
+
+Visit us at [configace.com](https://configace.com)!
 ## Showcase 🎭
 ![Using the App](https://media.giphy.com/media/QsHQYIZo4b7oQcr9U7/giphy.gif "Showcase")
-## Upcoming Features:
-- An option to load the default CSGO key bindings.
-- An option to add "unbind" / "unbindall" to your config.
-- Access to config presets
+
+## Feedback
+If you have any feedback or suggestions, please create a GitHub issue!
