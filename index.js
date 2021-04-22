@@ -190,10 +190,13 @@ document.body.onload = event => {
 
   document.getElementById('default-file-form').addEventListener('submit', e => {
     e.preventDefault();
-    ConfigState.loadStateDangerously(defaultBindings);
-    Object.keys(defaultBindings).forEach(bindCode => UIManagementTools.refreshBindCounter(bindCode));
-    UIManagementTools.refreshPanel(ConfigState.export().join('\n'));
-    UIManagementTools.hintToast('Loaded the default CSGO Config Bindings!');
+
+    if (confirm("Are you sure you'd like to reset to CSGOs default bindings? Your binds will be lost!")) {
+      ConfigState.loadStateDangerously(defaultBindings);
+      Object.keys(defaultBindings).forEach(bindCode => UIManagementTools.refreshBindCounter(bindCode));
+      UIManagementTools.refreshPanel(ConfigState.export().join('\n'));
+      UIManagementTools.hintToast('Loaded the default CSGO Config Bindings!');
+    }
   });
 
   fileUpload.addEventListener('change', (e)=> {
