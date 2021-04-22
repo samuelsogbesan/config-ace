@@ -25,11 +25,12 @@ const Keyboard = (layout, element = document.createElement('form')) => {
 
     if (keyElement.value === '!💾') {
       save();
+      UIManagementTools.toast(`We've generated your config file, check your downloads folder!`, 'success');
       return;
     } else if (keyElement.value === '!❌') {
       if(confirm("Are you sure you want to clear all your binds? Your changes will be lost!")) {
         UIManagementTools.clearBindCounters();
-        UIManagementTools.warnToast('Config Cleared!');
+        UIManagementTools.toast(`Config Cleared!`, 'warn');
         UIManagementTools.closeTray();
         ConfigState.clear();
         UIManagementTools.refreshPanel('');
@@ -48,7 +49,7 @@ const Keyboard = (layout, element = document.createElement('form')) => {
         searchInput.focus();
         currentKeyDisplay.innerHTML = bindCode;
         currentKeyDisplay.classList.remove('hidden');
-        UIManagementTools.hintToast('Select a command from the drop down menu.');
+        UIManagementTools.toast(`Select a command from the drop down menu.`, 'hint');
       } else {
         currentKeyDisplay.classList.add('hidden');
       }

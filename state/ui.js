@@ -8,6 +8,7 @@ const UITargets = {
   ResultsContainer: document.getElementById('search-form-results-container'),
   SearchResultsTarget: document.getElementById('search-results'),
   InstructionBox: document.getElementById('instruction-box'),
+  ToastContainer: document.getElementById('toast'),
   Keyboard: document.getElementById('keyboard'),
   CommandValueInputContainer: document.getElementById('search-form-value-container'),
   CommandValueInput: document.getElementById('command-value-input'),
@@ -54,23 +55,21 @@ UIManagementTools.openTray = () => {
 
 UIManagementTools.submitSearch = () => document.getElementById('main-submit').click();
 
-UIManagementTools.warnToast = (instruction) => {
-  UITargets.InstructionBox.classList.remove('hint');
-  UITargets.InstructionBox.classList.add('warm');
-  UITargets.InstructionBox.innerHTML = instruction;
-}
+/**
+ * 
+ * @param {*} instruction the message to popup
+ * @param {*} style the style of message. Either 'warn', 'success', 'hint' or empty string.
+ * @param {*} duration 
+ */
+UIManagementTools.toast = (instruction, style = '', duration = -1) => {
+  if (style !== '') {
+    UITargets.ToastContainer.classList.remove(...['warn', 'success', 'hint']);
+    console.log(UITargets.ToastContainer.className)
+    UITargets.ToastContainer.classList.add(style);
+    console.log(UITargets.ToastContainer.className)
+  }
 
-UIManagementTools.hintToast = (instruction) => {
-  UITargets.InstructionBox.classList.remove('warn');
-  UITargets.InstructionBox.classList.add('hint');
-  UITargets.InstructionBox.innerHTML = instruction;
-}
-
-UIManagementTools.flashToast = (message, oldMessage = UITargets.InstructionBox.innerHTML) => {
-  UITargets.InstructionBox.textContent = message;
-  setTimeout(() => {
-    UITargets.InstructionBox.textContent = oldMessage;
-  }, 3000);
+  UITargets.InstructionBox.textContent = instruction;
 }
 
 UIManagementTools.refreshBindCounter = (bind) => {

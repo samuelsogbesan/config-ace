@@ -257,7 +257,7 @@ textarea {
   }
 }
 
-.footer {
+#toast {
   position: fixed;
   bottom: 0;
   max-width: 60vw;
@@ -273,6 +273,18 @@ textarea {
   transition: transform 300ms ease-in-out;
 }
 
+#toast.hint {
+  /*background-color: grey;*/
+}
+
+#toast.warn {
+  background-color: rgb(153, 69, 0);
+}
+
+#toast.success {
+  background-color: green;
+}
+
 button[value="!❌"] {
   border-color: red;
   border-width: 2px;
@@ -283,10 +295,11 @@ button[value="!💾"] {
   border-width: 2px;
 }
 
-.footer.hidden {
+#toast.hidden {
   transition: transform 300ms ease-in-out;
   transform: translateY(200%);
   display: flex !important;
+  background-color: var(--background-primary);
 }
 
 .search {

@@ -49,11 +49,11 @@ document.body.onload = event => {
     }
 
     if (!QueryState.getState()) {
-      UIManagementTools.hintToast(`Don't forget to select a key to bind to. Use your keyboard or the onscreen keyboard to select one.`);
+      UIManagementTools.toast(`Don't forget to select a key to bind to. Use your keyboard or the onscreen keyboard to select one.`, 'hint');
     } else if (isBoundOption) {
-      UIManagementTools.hintToast(`You can update your bind with a new value, or you can go ahead and delete it.`);
+      UIManagementTools.toast(`You can update your bind with a new value, or you can go ahead and delete it.`, 'hint');
     } else {
-      UIManagementTools.hintToast(`Choose a value for the command, otherwise go ahead and click create!`);
+      UIManagementTools.toast(`Choose a value for the command, otherwise go ahead and click create!`, 'hint');
     }
   });
 
@@ -70,18 +70,18 @@ document.body.onload = event => {
     let submitter = event.submitter;
 
     if (!bindCode) {
-      UIManagementTools.warnToast(`You must select a key to bind '${command}: ${value}' to.`);
+      UIManagementTools.toast(`You must select a key to bind '${command}: ${value}' to.`, 'warn');
     }
     else if (bindCode !== "unbindable") {
       switch(submitter.getAttribute('name')) {
         case 'delete':
           ConfigState.removeBind(bindCode, command);
-          UIManagementTools.flashToast(`${command} Has been unbound from ${bindCode}`);
+          UIManagementTools.toast(`${command} Has been unbound from ${bindCode}`, 'warn', 3000);
           break;
         case 'create':
           ConfigState.addBind(bindCode, {command: command, value: value});
           ConfigState.setBindType(bindCode, bindType);
-          UIManagementTools.flashToast(`${command} Has been bound to ${bindCode}`);
+          UIManagementTools.toast(`${command} Has been bound to ${bindCode}`, 'success', 3000);
           break;
         default:
           throw new Error('Unknown Submitter');
@@ -144,13 +144,9 @@ document.body.onload = event => {
   header.addEventListener('focusout', event => {
     if (event.relatedTarget === null) {
       UIManagementTools.closeTray();
-      UIManagementTools.hintToast(`Select a key to bind commands to by clicking any key or using the on-screen keyboard.`);
+      //UIManagementTools.hintToast(`Select a key to bind commands to by clicking any key or using the on-screen keyboard.`);
+      UIManagementTools.toast('Select a key to bind commands to by clicking any key or using the on-screen keyboard.', 'hint');
     }
-  });
-
-  document.getElementById('footer-save-submit').addEventListener('submit', event => {
-    event.preventDefault();
-    save();
   });
 
   document.getElementById('help-form').addEventListener('submit', event => {
@@ -181,7 +177,7 @@ document.body.onload = event => {
       });
 
       UIManagementTools.refreshPanel(ConfigState.export().join('\n'));
-      UIManagementTools.hintToast('Your Config File Loaded!');
+      UIManagementTools.toast('Your Config File Loaded!');
     }
   }
 
@@ -195,7 +191,7 @@ document.body.onload = event => {
       ConfigState.loadStateDangerously(defaultBindings);
       Object.keys(defaultBindings).forEach(bindCode => UIManagementTools.refreshBindCounter(bindCode));
       UIManagementTools.refreshPanel(ConfigState.export().join('\n'));
-      UIManagementTools.hintToast('Loaded the default CSGO Config Bindings!');
+      UIManagementTools.toast('Loaded the default CSGO Config Bindings!', 'success');
     }
   });
 
