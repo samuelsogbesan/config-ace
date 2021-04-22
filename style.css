@@ -388,6 +388,9 @@ label[for="file-upload"] {
   color: var(--text-primary);
   margin: 0;
   margin-bottom: 10px;
+  font-size: 2rem;
+  font-weight: bold;
+  display: block;
 }
 
 #current-key::after {
