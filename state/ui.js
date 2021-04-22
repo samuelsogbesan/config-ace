@@ -64,9 +64,7 @@ UIManagementTools.submitSearch = () => document.getElementById('main-submit').cl
 UIManagementTools.toast = (instruction, style = '', duration = -1) => {
   if (style !== '') {
     UITargets.ToastContainer.classList.remove(...['warn', 'success', 'hint']);
-    console.log(UITargets.ToastContainer.className)
     UITargets.ToastContainer.classList.add(style);
-    console.log(UITargets.ToastContainer.className)
   }
 
   UITargets.InstructionBox.textContent = instruction;
