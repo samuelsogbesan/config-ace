@@ -70,7 +70,7 @@ UIManagementTools.flashToast = (message, oldMessage = UITargets.InstructionBox.i
   UITargets.InstructionBox.textContent = message;
   setTimeout(() => {
     UITargets.InstructionBox.textContent = oldMessage;
-  }, 600);
+  }, 3000);
 }
 
 UIManagementTools.refreshBindCounter = (bind) => {
