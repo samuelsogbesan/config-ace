@@ -16,6 +16,7 @@ document.body.onload = event => {
   Keyboard(layouts.QWERTY, document.getElementById('keyboard'));
 
   // Listen for key inputs
+  /*
   document.body.addEventListener('keydown', ({code}) => {
     if (!document.getElementById('popup').classList.contains('hidden')) return;
 
@@ -31,6 +32,7 @@ document.body.onload = event => {
       }
     }
   });
+  */
 
   const resultsContainer = document.getElementById('search-results');
   resultsContainer.addEventListener('click', event => {
