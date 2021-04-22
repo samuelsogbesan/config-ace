@@ -9,6 +9,7 @@ const { getKey } = require('./utils/getKey.js');
 const { save } = require('./utils/save.js');
 const { convert, parse } = require('./utils/parse.js');
 const defaultBindings = require('./constants/defaultBindings.js');
+const Toast = require('./components/Toast');
 
 document.body.onload = event => {
   // Generate keyboard
@@ -143,9 +144,8 @@ document.body.onload = event => {
   header.addEventListener('focusout', event => {
     if (event.relatedTarget === null) {
       UIManagementTools.closeTray();
+      UIManagementTools.hintToast(`Hit any key on your keyboard!`);
     }
-
-    UIManagementTools.hintToast(`Hit any key on your keyboard!`);
   });
 
   document.getElementById('footer-save-submit').addEventListener('submit', event => {
@@ -216,6 +216,9 @@ document.body.onload = event => {
     UIManagementTools.hideElement('#bindtoggle-warning');
     document.querySelectorAll('.bound').forEach((element, idx) => { if (idx > 0) element.classList.remove('but-ignored'); });
   });
+
+  // Sets up a trigger for when the toast is updated.
+  Toast(document.getElementById('instruction-box'));
 
   QueryState.setQuery(null);
 
