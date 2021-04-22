@@ -178,7 +178,7 @@ document.body.onload = event => {
       });
 
       UIManagementTools.refreshPanel(ConfigState.export().join('\n'));
-      UIManagementTools.toast('Your Config File Loaded!');
+      UIManagementTools.toast('Your Config File was Loaded Successfully.', 'success');
     }
   }
 
