@@ -11,26 +11,6 @@
   <link rel="manifest" href="site.webmanifest">
 </head>
 <body class="container" id="body">
-  <nav id="main-menu">
-    <form id="help-form">
-      <input type="submit" value="?" class="circular-submit" title="Get Help">
-    </form>
-    <form id="file-form">
-      <label for="file-upload" class="circular-submit" title="Upload a config file to start from">
-        📤
-        <input id="file-upload" name="file" type="file" class="hidden" accept=".cfg" required value="default.cfg">
-      </label>
-      <input id="file-form-submit" type="submit" class="hidden">
-    </form>
-    <form id="default-file-form">
-      <label for="default-file-form-submit" class="circular-submit" title="Load CSGOs default bindings">
-        🔃
-      </label>
-      <input id="default-file-form-submit" type="submit" class="hidden">
-    </form>
-  </nav>
-
-  <div id="content-blocker" class="hidden"></div>
   <div id="popup" class="hidden">
     <form id="popup-closer"><input type="submit" class="secondary-submit" value="X"></form>
     <h1>Config Ace ✪</h1>
@@ -75,6 +55,27 @@
     <span>Have a suggestion or some feedback? Create a <a target="_blank" href="https://github.com/samuelsogbesan/config-ace/issues/new?title=[📝] Suggestion: Suggestion Title Goes Here&body=Write here about your suggestion. Thanks for the contribution! ✌️" referrerpolicy="no-referrer">GitHub Issue</a></span>
   </div>
 
+  <div id="content-blocker" class="hidden"></div>
+
+  <nav id="main-menu">
+    <form id="help-form">
+      <input type="submit" value="?" class="circular-submit" title="Get Help">
+    </form>
+    <form id="file-form">
+      <label for="file-upload" class="circular-submit" title="Upload a config file to start from">
+        📤
+        <input id="file-upload" name="file" type="file" class="hidden" accept=".cfg" required value="default.cfg">
+      </label>
+      <input id="file-form-submit" type="submit" class="hidden">
+    </form>
+    <form id="default-file-form">
+      <label for="default-file-form-submit" class="circular-submit" title="Load CSGOs default bindings">
+        🔃
+      </label>
+      <input id="default-file-form-submit" type="submit" class="hidden">
+    </form>
+  </nav>
+  
   <header class="search-nav" tabindex="0">
     <h1 id="current-key" class="hidden"></h1>
     <form id="search-form">
