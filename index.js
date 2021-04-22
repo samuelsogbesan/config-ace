@@ -51,7 +51,7 @@ document.body.onload = event => {
     }
 
     if (!QueryState.getState()) {
-      UIManagementTools.toast(`Don't forget to select a key to bind to. Use your keyboard or the onscreen keyboard to select one.`, 'hint');
+      UIManagementTools.toast(`Don't forget to select a key to bind to. Use the onscreen keyboard to select one.`, 'hint');
     } else if (isBoundOption) {
       UIManagementTools.toast(`You can update your bind with a new value, or you can go ahead and delete it.`, 'hint');
     } else {
@@ -146,8 +146,7 @@ document.body.onload = event => {
   header.addEventListener('focusout', event => {
     if (event.relatedTarget === null) {
       UIManagementTools.closeTray();
-      //UIManagementTools.hintToast(`Select a key to bind commands to by clicking any key or using the on-screen keyboard.`);
-      UIManagementTools.toast('Select a key to bind commands to by clicking any key or using the on-screen keyboard.', 'hint');
+      UIManagementTools.toast('Select a key to bind a command to by using the on-screen keyboard.', 'hint');
     }
   });
 
