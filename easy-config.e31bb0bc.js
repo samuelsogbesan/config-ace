@@ -659,9 +659,7 @@ UIManagementTools.toast = function (instruction) {
 
     (_UITargets$ToastConta = UITargets.ToastContainer.classList).remove.apply(_UITargets$ToastConta, ['warn', 'success', 'hint']);
 
-    console.log(UITargets.ToastContainer.className);
     UITargets.ToastContainer.classList.add(style);
-    console.log(UITargets.ToastContainer.className);
   }
 
   UITargets.InstructionBox.textContent = instruction;
