@@ -144,7 +144,7 @@ document.body.onload = event => {
   header.addEventListener('focusout', event => {
     if (event.relatedTarget === null) {
       UIManagementTools.closeTray();
-      UIManagementTools.hintToast(`Hit any key on your keyboard!`);
+      UIManagementTools.hintToast(`Select a key to bind commands to by clicking any key or using the on-screen keyboard.`);
     }
   });
 
