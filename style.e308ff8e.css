@@ -69,6 +69,18 @@ a {
   text-decoration: none;
 }
 
+a:any-link {
+  color: rgb(0, 69, 139);
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+a:any-link::before {
+  display: inline-block;
+  content:"🔗";
+  padding-right: 0.1rem;
+}
+
 @keyframes LED {
   0% {
     border-color: red;
@@ -233,19 +245,61 @@ textarea {
   z-index: 1;
 }
 
-.footer {
+@keyframes flyin {
+  0% {
+    transform: translateY(100%);
+    opacity: 0%;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 100%;
+  }
+}
+
+#toast {
   position: fixed;
   bottom: 0;
   max-width: 60vw;
   width: calc(50px * 16);
   margin-bottom: 20px;
-  padding: 20px;
+  padding: 10px 20px;
   border-radius: 5px;
   box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.14) , 0px 3px 1px -2px rgba(0,0,0,0.12) , 0px 1px 5px 0px rgba(0,0,0,0.2);
   z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: transform 300ms ease-in-out;
+}
+
+#toast.hint {
+  /*background-color: grey;*/
+}
+
+#toast.warn {
+  background-color: rgb(153, 69, 0);
+}
+
+#toast.success {
+  background-color: green;
+}
+
+button[value="!❌"] {
+  border-color: red;
+  border-width: 2px;
+}
+
+button[value="!💾"] {
+  border-color: gainsboro;
+  border-width: 2px;
+}
+
+#toast.hidden {
+  transition: transform 300ms ease-in-out;
+  transform: translateY(200%);
+  display: flex !important;
+  background-color: var(--background-primary);
 }
 
 .search {
@@ -400,6 +454,20 @@ nav, div, section, header, footer {
   background-color: var(--background-primary);
 }
 
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: initial;
+  }
+}
+
+#popup:not(.hidden) {
+  animation: fadein 400ms ease-in-out;
+}
+
 #popup-closer input[type="submit"] {
   float: right;
 }
@@ -429,6 +497,18 @@ ol {
   text-underline-offset: 5px;
 }
 
+@media only screen and (max-width: 1000px) {
+  .main-section {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  #config-panel {
+    order: 2;
+    height: 150px;
+  }
+}
+
 @media only screen and (max-width: calc(50px * 16)) {
   #search-results-submit {
     align-self: center;
@@ -453,6 +533,10 @@ ol {
   .main-section {
     grid-template-columns: 1fr;
     gap: 50px;
+  }
+
+  .key[value="!💾"] {
+    order: -1;
   }
 
   #config-panel {

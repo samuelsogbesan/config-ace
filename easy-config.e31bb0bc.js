@@ -594,6 +594,7 @@ var UITargets = {
   ResultsContainer: document.getElementById('search-form-results-container'),
   SearchResultsTarget: document.getElementById('search-results'),
   InstructionBox: document.getElementById('instruction-box'),
+  ToastContainer: document.getElementById('toast'),
   Keyboard: document.getElementById('keyboard'),
   CommandValueInputContainer: document.getElementById('search-form-value-container'),
   CommandValueInput: document.getElementById('command-value-input'),
@@ -641,25 +642,29 @@ UIManagementTools.openTray = function () {
 UIManagementTools.submitSearch = function () {
   return document.getElementById('main-submit').click();
 };
+/**
+ * 
+ * @param {*} instruction the message to popup
+ * @param {*} style the style of message. Either 'warn', 'success', 'hint' or empty string.
+ * @param {*} duration 
+ */
 
-UIManagementTools.warnToast = function (instruction) {
-  UITargets.InstructionBox.classList.remove('hint');
-  UITargets.InstructionBox.classList.add('warm');
-  UITargets.InstructionBox.innerHTML = instruction;
-};
 
-UIManagementTools.hintToast = function (instruction) {
-  UITargets.InstructionBox.classList.remove('warn');
-  UITargets.InstructionBox.classList.add('hint');
-  UITargets.InstructionBox.innerHTML = instruction;
-};
+UIManagementTools.toast = function (instruction) {
+  var style = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+  var duration = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : -1;
 
-UIManagementTools.flashToast = function (message) {
-  var oldMessage = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : UITargets.InstructionBox.innerHTML;
-  UITargets.InstructionBox.textContent = message;
-  setTimeout(function () {
-    UITargets.InstructionBox.textContent = oldMessage;
-  }, 600);
+  if (style !== '') {
+    var _UITargets$ToastConta;
+
+    (_UITargets$ToastConta = UITargets.ToastContainer.classList).remove.apply(_UITargets$ToastConta, ['warn', 'success', 'hint']);
+
+    console.log(UITargets.ToastContainer.className);
+    UITargets.ToastContainer.classList.add(style);
+    console.log(UITargets.ToastContainer.className);
+  }
+
+  UITargets.InstructionBox.textContent = instruction;
 };
 
 UIManagementTools.refreshBindCounter = function (bind) {
@@ -836,11 +841,12 @@ var Keyboard = function Keyboard(layout) {
 
     if (keyElement.value === '!💾') {
       save();
+      UIManagementTools.toast("We've generated your config file, check your downloads folder!", 'success');
       return;
     } else if (keyElement.value === '!❌') {
       if (confirm("Are you sure you want to clear all your binds? Your changes will be lost!")) {
         UIManagementTools.clearBindCounters();
-        UIManagementTools.warnToast('Config Cleared!');
+        UIManagementTools.toast("Config Cleared!", 'warn');
         UIManagementTools.closeTray();
         ConfigState.clear();
         UIManagementTools.refreshPanel('');
@@ -858,7 +864,7 @@ var Keyboard = function Keyboard(layout) {
         searchInput.focus();
         currentKeyDisplay.innerHTML = bindCode;
         currentKeyDisplay.classList.remove('hidden');
-        UIManagementTools.hintToast('Select a command from the drop down menu.');
+        UIManagementTools.toast("Select a command from the drop down menu.", 'hint');
       } else {
         currentKeyDisplay.classList.add('hidden');
       }
@@ -1209,6 +1215,59 @@ module.exports = {
     "toggle": ""
   }
 };
+},{}],"components/Toast.js":[function(require,module,exports) {
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+/**
+ * Hooks toast animations to a specific HTMLElement.
+ * @param trigger a HTMLElement that will be updated.
+ */
+var Toast = function Toast(trigger) {
+  // Options for the observer (which mutations to observe)
+  var config = {
+    characterData: false,
+    attributes: false,
+    childList: true,
+    subtree: false
+  }; // Callback function to execute when mutations are observed
+
+  var callback = function callback(mutationsList, observer) {
+    // Use traditional 'for loops' for IE 11
+    var _iterator = _createForOfIteratorHelper(mutationsList),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var mutation = _step.value;
+
+        if (mutation.type === 'childList' && mutation.addedNodes.length > 0 && mutation.addedNodes.item(0).data !== mutation.removedNodes.item(0).data) {
+          (function () {
+            var toast = document.getElementById('toast');
+            toast.classList.add('hidden');
+            setTimeout(function () {
+              return toast.classList.remove('hidden');
+            }, 300);
+          })();
+        }
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+  }; // Create an observer instance linked to the callback function
+
+
+  var observer = new MutationObserver(callback); // Start observing the target node for configured mutations
+
+  observer.observe(trigger, config);
+};
+
+module.exports = Toast;
 },{}],"index.js":[function(require,module,exports) {
 var Keyboard = require('./components/Keyboard.js');
 
@@ -1235,6 +1294,8 @@ var _require3 = require('./utils/parse.js'),
     parse = _require3.parse;
 
 var defaultBindings = require('./constants/defaultBindings.js');
+
+var Toast = require('./components/Toast');
 
 document.body.onload = function (event) {
   // Generate keyboard
@@ -1274,11 +1335,11 @@ document.body.onload = function (event) {
     }
 
     if (!QueryState.getState()) {
-      UIManagementTools.hintToast("Don't forget to select a key to bind to. Use your keyboard or the onscreen keyboard to select one.");
+      UIManagementTools.toast("Don't forget to select a key to bind to. Use your keyboard or the onscreen keyboard to select one.", 'hint');
     } else if (isBoundOption) {
-      UIManagementTools.hintToast("You can update your bind with a new value, or you can go ahead and delete it.");
+      UIManagementTools.toast("You can update your bind with a new value, or you can go ahead and delete it.", 'hint');
     } else {
-      UIManagementTools.hintToast("Choose a value for the command, otherwise go ahead and click create!");
+      UIManagementTools.toast("Choose a value for the command, otherwise go ahead and click create!", 'hint');
     }
   }); // When A User Submits a Binding.
 
@@ -1293,12 +1354,12 @@ document.body.onload = function (event) {
     var submitter = event.submitter;
 
     if (!bindCode) {
-      UIManagementTools.warnToast("You must select a key to bind '".concat(command, ": ").concat(value, "' to."));
+      UIManagementTools.toast("You must select a key to bind '".concat(command, ": ").concat(value, "' to."), 'warn');
     } else if (bindCode !== "unbindable") {
       switch (submitter.getAttribute('name')) {
         case 'delete':
           ConfigState.removeBind(bindCode, command);
-          UIManagementTools.flashToast("".concat(command, " Has been unbound from ").concat(bindCode));
+          UIManagementTools.toast("".concat(command, " Has been unbound from ").concat(bindCode), 'warn', 3000);
           break;
 
         case 'create':
@@ -1307,7 +1368,7 @@ document.body.onload = function (event) {
             value: value
           });
           ConfigState.setBindType(bindCode, bindType);
-          UIManagementTools.flashToast("".concat(command, " Has been bound to ").concat(bindCode));
+          UIManagementTools.toast("".concat(command, " Has been bound to ").concat(bindCode), 'success', 3000);
           break;
 
         default:
@@ -1363,14 +1424,10 @@ document.body.onload = function (event) {
   var header = document.querySelector('.search-nav');
   header.addEventListener('focusout', function (event) {
     if (event.relatedTarget === null) {
-      UIManagementTools.closeTray();
-    }
+      UIManagementTools.closeTray(); //UIManagementTools.hintToast(`Select a key to bind commands to by clicking any key or using the on-screen keyboard.`);
 
-    UIManagementTools.hintToast("Hit any key on your keyboard!");
-  });
-  document.getElementById('footer-save-submit').addEventListener('submit', function (event) {
-    event.preventDefault();
-    save();
+      UIManagementTools.toast('Select a key to bind commands to by clicking any key or using the on-screen keyboard.', 'hint');
+    }
   });
   document.getElementById('help-form').addEventListener('submit', function (event) {
     event.preventDefault();
@@ -1402,7 +1459,7 @@ document.body.onload = function (event) {
         UIManagementTools.refreshBindCounter(bindCode);
       });
       UIManagementTools.refreshPanel(ConfigState.export().join('\n'));
-      UIManagementTools.hintToast('Your Config File Loaded!');
+      UIManagementTools.toast('Your Config File Loaded!');
     };
   };
 
@@ -1410,12 +1467,15 @@ document.body.onload = function (event) {
   var fileUpload = document.getElementById('file-upload');
   document.getElementById('default-file-form').addEventListener('submit', function (e) {
     e.preventDefault();
-    ConfigState.loadStateDangerously(defaultBindings);
-    Object.keys(defaultBindings).forEach(function (bindCode) {
-      return UIManagementTools.refreshBindCounter(bindCode);
-    });
-    UIManagementTools.refreshPanel(ConfigState.export().join('\n'));
-    UIManagementTools.hintToast('Loaded the default CSGO Config Bindings!');
+
+    if (confirm("Are you sure you'd like to reset to CSGOs default bindings? Your binds will be lost!")) {
+      ConfigState.loadStateDangerously(defaultBindings);
+      Object.keys(defaultBindings).forEach(function (bindCode) {
+        return UIManagementTools.refreshBindCounter(bindCode);
+      });
+      UIManagementTools.refreshPanel(ConfigState.export().join('\n'));
+      UIManagementTools.toast('Loaded the default CSGO Config Bindings!', 'success');
+    }
   });
   fileUpload.addEventListener('change', function (e) {
     document.getElementById('file-form-submit').click();
@@ -1437,14 +1497,16 @@ document.body.onload = function (event) {
     document.querySelectorAll('.bound').forEach(function (element, idx) {
       if (idx > 0) element.classList.remove('but-ignored');
     });
-  });
+  }); // Sets up a trigger for when the toast is updated.
+
+  Toast(document.getElementById('instruction-box'));
   QueryState.setQuery(null);
   UIManagementTools.refreshPanel(ConfigState.export().join('\n'));
   UIManagementTools.showPopup({
     stubborn: true
   });
 };
-},{"./components/Keyboard.js":"components/Keyboard.js","./utils/keyToBind.js":"utils/keyToBind.js","./constants/LAYOUTS.js":"constants/LAYOUTS.js","./utils/command-search":"utils/command-search.js","./state/query":"state/query.js","./state/config.js":"state/config.js","./state/ui.js":"state/ui.js","./utils/getKey.js":"utils/getKey.js","./utils/save.js":"utils/save.js","./utils/parse.js":"utils/parse.js","./constants/defaultBindings.js":"constants/defaultBindings.js"}],"../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./components/Keyboard.js":"components/Keyboard.js","./utils/keyToBind.js":"utils/keyToBind.js","./constants/LAYOUTS.js":"constants/LAYOUTS.js","./utils/command-search":"utils/command-search.js","./state/query":"state/query.js","./state/config.js":"state/config.js","./state/ui.js":"state/ui.js","./utils/getKey.js":"utils/getKey.js","./utils/save.js":"utils/save.js","./utils/parse.js":"utils/parse.js","./constants/defaultBindings.js":"constants/defaultBindings.js","./components/Toast":"components/Toast.js"}],"../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1472,7 +1534,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33735" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "47803" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
