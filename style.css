@@ -484,6 +484,18 @@ ol {
   text-underline-offset: 5px;
 }
 
+@media only screen and (max-width: 1000px) {
+  .main-section {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  #config-panel {
+    order: 2;
+    height: 150px;
+  }
+}
+
 @media only screen and (max-width: calc(50px * 16)) {
   #search-results-submit {
     align-self: center;
@@ -508,6 +520,10 @@ ol {
   .main-section {
     grid-template-columns: 1fr;
     gap: 50px;
+  }
+
+  .key[value="!💾"] {
+    order: -1;
   }
 
   #config-panel {
