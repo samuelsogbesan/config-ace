@@ -439,7 +439,7 @@ nav, div, section, header, footer {
   gap: 50px;
 }
 
-#popup {
+#popup-container {
   position: absolute;
   min-width: 50vw;
   min-height: 50vh;
@@ -467,7 +467,7 @@ nav, div, section, header, footer {
   }
 }
 
-#popup:not(.hidden) {
+#popup-container:not(.hidden) {
   animation: fadein 400ms ease-in-out;
 }
 
@@ -500,7 +500,7 @@ ol {
   text-underline-offset: 5px;
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1250px) {
   .main-section {
     grid-template-columns: 1fr;
     gap: 50px;

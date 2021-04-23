@@ -16,7 +16,7 @@ const UITargets = {
   BindTypeInputContainer: document.getElementById('search-form-bindtype-container'),
   ContentBlocker: document.getElementById('content-blocker'),
   DeleteButton: document.getElementById('search-results-submit-delete'),
-  Popup: document.getElementById('popup'),
+  Popup: document.getElementById('popup-container'),
   ConfigPanel: document.getElementById('config-panel')
 }
 
