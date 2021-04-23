@@ -17,7 +17,8 @@ const UITargets = {
   ContentBlocker: document.getElementById('content-blocker'),
   DeleteButton: document.getElementById('search-results-submit-delete'),
   Popup: document.getElementById('popup-container'),
-  ConfigPanel: document.getElementById('config-panel')
+  ConfigPanel: document.getElementById('config-panel'),
+  Tray: document.getElementById('search-tray')
 }
 
 const UIManagementTools = {}
@@ -34,6 +35,7 @@ UIManagementTools.closeTray = () => {
   UITargets.BindTypeInputContainer.children[0].children[0].click();
   UITargets.SearchSubmitContainer.classList.add('hidden');
   UITargets.BindTypeInputContainer.classList.add('hidden');
+  UITargets.Tray.classList.add('hidden');
 }
 
 UIManagementTools.showElement = (selector, focus=false) => {
@@ -51,6 +53,7 @@ UIManagementTools.openTray = () => {
   UITargets.SearchSubmitContainer.classList.remove('hidden');
   UITargets.SearchResultsTarget.blur();
   UITargets.DeleteButton.disabled = true;
+  UITargets.Tray.classList.remove('hidden');
 }
 
 UIManagementTools.submitSearch = () => document.getElementById('main-submit').click();

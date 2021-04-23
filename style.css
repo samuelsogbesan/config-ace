@@ -243,6 +243,20 @@ textarea {
   gap: 10px
 }
 
+#search-tray {
+  z-index: 4;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  margin: 30px auto;
+  max-width: calc(60vw);
+  width: calc(50px * 16);
+  left: 0;
+  right: 0;
+}
+
 .search-nav {
   background-color: var(--background-primary);
   top: 0;
