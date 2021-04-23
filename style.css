@@ -500,19 +500,48 @@ ol {
   text-underline-offset: 5px;
 }
 
-@media only screen and (max-width: 1250px) {
+.ad {
+  width: 400px;
+  height: 400px;
+}
+
+@media only screen and (min-width: calc(50px * 16)) and (max-width: 1500px) {
   .main-section {
-    grid-template-columns: 1fr;
+    grid-template-areas: 
+    "a a"
+    "b c";
+    grid-template-columns: unset;
+    grid-template-rows: unset;
     gap: 50px;
+    justify-content: center;
+  }
+
+  .keyboard {
+    grid-area: a;
   }
 
   #config-panel {
-    order: 2;
-    height: 150px;
+    order: unset;
+    grid-area: b;
+
+  }
+
+  .ad {
+    grid-area: c;
   }
 }
 
 @media only screen and (max-width: calc(50px * 16)) {
+
+  .main-section {
+    grid-template-areas: unset;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
+    align-items: end;
+    justify-content: center;
+    overflow-y: scroll;
+  }
+
   #search-results-submit {
     align-self: center;
   }
@@ -523,14 +552,14 @@ ol {
   }
 
   .keyboard {
-    min-width: calc(50px + 30px);
-    max-width: calc(50px + 30px);
+    min-width: 60%;
+    max-width: 60%;
     max-height: calc(50px*7);
     overflow-y: scroll;
   }
 
   .key {
-    flex: 0 0 100% !important;
+    flex: 0 0 40% !important;
   }
 
   .main-section {
@@ -543,7 +572,6 @@ ol {
   }
 
   #config-panel {
-    order: 2;
-    height: 150px;
+    width: 60%;
   }
 }
