@@ -370,7 +370,6 @@ input[type="submit"], input[type="file"], label {
 }
 
 label[for="file-upload"] {
-  display: block;
   text-decoration: none;
 }
 
