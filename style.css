@@ -407,7 +407,7 @@ label[for="file-upload"] {
 #current-key {
   color: var(--text-primary);
   margin: 0;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   font-size: 2rem;
   font-weight: bold;
   display: block;
@@ -450,9 +450,42 @@ nav, div, section, header, footer {
   text-align: center;
 }
 
+#main-brand::before {
+  content: none;
+  padding: none;
+}
+
+#main-brand {
+  font-weight: bold;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
 #main-menu {
+  display: flex;
+  justify-content: space-between;
+  width: calc(100% + -2.5%);
+  padding: 1rem 0;
+}
+
+#main-menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1rem;
+  font-size: 0.75rem;
+  align-items: center;
+}
+
+#main-menu ul li a {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+#side-menu {
   position: fixed;
-  top: 2rem;
+  top: 5rem;
   right: 2rem;
   display: flex;
   flex-direction: column;
