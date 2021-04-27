@@ -23,7 +23,7 @@ ConfigState.export = () => {
   let allBinds = state();
   const binds = [];
   Object.keys(allBinds).forEach(bindCode => {
-    let concatinatedCommands = "";
+    let concatinatedCommands = `"`;
     let bindType = allBinds[bindCode]._meta.bindType;
 
     if (bindType === 'BindToggle') {
@@ -37,6 +37,7 @@ ConfigState.export = () => {
       });
     }
 
+    concatinatedCommands = concatinatedCommands.concat(`"`);
     let bindString = `${bindType} "${bindCode}" ${concatinatedCommands}\n`;
     binds.push(bindString);
   });
