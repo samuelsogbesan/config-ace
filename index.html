@@ -58,7 +58,18 @@
 
   <div id="content-blocker" class="hidden"></div>
 
-  <nav id="main-menu">
+  <div style="width: 100%; display: flex; justify-content: center;">
+    <nav id="main-menu">
+      <a id="main-brand" href="/">Config Ace ✪</a>
+      <ul>
+        <li><a href="/">App</a></li>
+        <li><a href="/help.html">Marketplace</a></li>
+        <li><a href="/help.html">How To</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <nav id="side-menu">
     <form id="help-form">
       <input type="submit" value="?" class="circular-submit" title="Get Help">
     </form>
@@ -78,7 +89,7 @@
   </nav>
   
   <header class="search-nav" tabindex="0">
-    <span id="current-key" class="hidden"></span>
+    <span id="current-key">&ltkey&gt</span>
     <form id="search-form">
         <input id="main-search" name="search" class="search" type="search" placeholder="Search for a command... 🔍" autocomplete="off">
       <div id="search-tray" class="hidden">

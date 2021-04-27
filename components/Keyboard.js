@@ -23,6 +23,8 @@ const Keyboard = (layout, element = document.createElement('form')) => {
 
     const keyElement = event.submitter;
 
+    const currentKeyDisplay = document.getElementById('current-key');
+
     if (keyElement.value === '!💾') {
       save();
       UIManagementTools.toast(`We've generated your config file, check your downloads folder!`, 'success');
@@ -34,6 +36,7 @@ const Keyboard = (layout, element = document.createElement('form')) => {
         UIManagementTools.closeTray();
         ConfigState.clear();
         UIManagementTools.refreshPanel('');
+        currentKeyDisplay.innerHTML = '&ltkey&gt';
       }
     }
 
@@ -41,8 +44,6 @@ const Keyboard = (layout, element = document.createElement('form')) => {
 
     if (document.activeElement !== searchInput) {
       const bindCode = keyElement.getAttribute('data-bindcode');
-
-      const currentKeyDisplay = document.getElementById('current-key');
       QueryState.setQuery(bindCode);
 
       if (bindCode !== 'unbindable') {
@@ -50,8 +51,6 @@ const Keyboard = (layout, element = document.createElement('form')) => {
         currentKeyDisplay.innerHTML = bindCode;
         currentKeyDisplay.classList.remove('hidden');
         UIManagementTools.toast(`Select a command from the drop down menu.`, 'hint');
-      } else {
-        currentKeyDisplay.classList.add('hidden');
       }
     }
 
