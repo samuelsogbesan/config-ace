@@ -42,8 +42,9 @@ document.body.onload = event => {
     // Lil bit hackky since it uses the CSS to correlate state.
     let isBoundOption = event.target.classList.contains("bound");
     if (isBoundOption) {
+      let binds = ConfigState.getBind(QueryState.getState());
       document.getElementById('search-results-submit-delete').disabled = false;
-      let commandValue = ConfigState.getBind(QueryState.getState())[event.target.value];
+      let commandValue = binds[event.target.value];
       UIManagementTools.updateCommandValueInputPrompt(commandValue.trim());
     } else if (document.getElementById('search-results-submit-delete').disabled === false) {
       document.getElementById('search-results-submit-delete').disabled = true;
@@ -127,7 +128,25 @@ document.body.onload = event => {
     }
 
     UIManagementTools.refreshSearchResults(results, (result, element) => {
-      if (BoundCommandSet.has(result)) element.classList.add('bound');
+      if (BoundCommandSet.has(result)) {
+        element.classList.add('bound');
+
+        element.draggable = true;
+
+        element.addEventListener('dragstart', event => {
+          event.dataTransfer.setData("text/plain", element.name);
+        });
+
+        element.addEventListener('dragover', event => {
+          event.preventDefault();
+          event.dataTransfer.dropEffect = "move";
+        });
+    
+        element.addEventListener('drop', event => {
+          event.preventDefault();
+          // TODO: Swap
+        });
+      }
     });
 
     UIManagementTools.openTray();
