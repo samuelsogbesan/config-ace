@@ -51,6 +51,11 @@ const Keyboard = (layout, element = document.createElement('form')) => {
         currentKeyDisplay.innerHTML = bindCode;
         currentKeyDisplay.classList.remove('hidden');
         UIManagementTools.toast(`Select a command from the drop down menu.`, 'hint');
+
+        let binds = ConfigState.getBind(QueryState.getState());
+        if (binds && binds._meta.bindType === 'BindToggle') {
+          document.getElementById('bindtoggle-option').click();
+        }
       }
     }
 
