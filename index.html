@@ -58,16 +58,14 @@
 
   <div id="content-blocker" class="hidden"></div>
 
-  <div style="width: 100%; display: flex; justify-content: center;">
+  <header style="width: 100%; display: flex; justify-content: center;">
     <nav id="main-menu">
       <a id="main-brand" href="/">Config Ace ✪</a>
       <ul>
         <li><a href="/">App</a></li>
-        <li><a href="/help.html">Marketplace</a></li>
-        <li><a href="/help.html">How To</a></li>
       </ul>
     </nav>
-  </div>
+  </header>
 
   <nav id="side-menu">
     <form id="help-form">
@@ -88,7 +86,7 @@
     </form>
   </nav>
   
-  <header class="search-nav" tabindex="0">
+  <div class="search-nav" tabindex="0">
     <span id="current-key">&ltkey&gt</span>
     <form id="search-form">
         <input id="main-search" name="search" class="search" type="search" placeholder="Search for a command... 🔍" autocomplete="off">
@@ -117,13 +115,14 @@
         </div>
       </div>
     </form>
-  </header>
+  </div>
 
   <section class="main-section">
     <textarea id="config-panel" class="board" readonly placeholder="Config Preview Window (empty)"></textarea>
     <form id='keyboard'></form>
     <!-- Config Ace Square Ad Placement -->
     <div class="ad">
+      <span>Your ad here!</span>
       <ins class="adsbygoogle"
       style="display:block"
       data-ad-client="ca-pub-3277040688747423"
