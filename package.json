@@ -2,10 +2,9 @@
   "name": "easy-config",
   "version": "1.0.0",
   "description": "CSGO Config Web App",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "predeploy": "parcel build index.html --public-url .",
+    "predeploy": "npx parcel build index.html --public-url .",
     "deploy": "gh-pages -d dist",
     "start": "parcel index.html"
   },
@@ -23,7 +22,10 @@
     "local-storage": "^2.0.0"
   },
   "devDependencies": {
+    "@parcel/packager-raw-url": "^2.0.0-beta.2",
+    "@parcel/transformer-webmanifest": "^2.0.0-beta.2",
     "cssnano": "^4.1.10",
-    "gh-pages": "^3.1.0"
+    "gh-pages": "^3.1.0",
+    "parcel": "^2.0.0-beta.2"
   }
 }
