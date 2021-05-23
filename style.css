@@ -119,6 +119,7 @@ a:any-link::before {
   height: 100%;
   text-align: center;
   outline: 1px white solid;
+  visibility: hidden;
 }
 
 .board {
@@ -336,7 +337,7 @@ button[value="!💾"] {
   border-radius: 2px;
   border: none;
   background-color: var(--input-bg);
-  color: var(--text-primary);
+  color: black;
   width: 100%;
 }
 
@@ -518,10 +519,16 @@ nav, div, section, header, footer {
   box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.14) , 0px 3px 1px -2px rgba(0,0,0,0.12) , 0px 1px 5px 0px rgba(0,0,0,0.2);
   overflow-y: scroll;
   top: 50%;
-  left: 50%;
+  left: 0;
+  right: 0;
   margin-top: -30vh;
-  margin-left: -30vw;
+  margin-left: auto;
+  margin-right: auto;
   background-color: var(--background-primary);
+}
+
+#popup-closer-2 {
+  padding: 1rem 0;
 }
 
 @keyframes fadein {
@@ -536,6 +543,12 @@ nav, div, section, header, footer {
 
 #popup-container:not(.hidden) {
   animation: fadein 400ms ease-in-out;
+}
+
+#popup-closer {
+  position: sticky;
+  right: 0;
+  top: 0;
 }
 
 #popup-closer input[type="submit"] {
