@@ -13,7 +13,7 @@
 </head>
 <body class="container" id="body">
   <div id="popup-container" class="hidden">
-    <form id="popup-closer"><input type="submit" class="secondary-submit" value="X"></form>
+    <form id="popup-closer"><input type="submit" class="secondary-submit" value="Close"></form>
     <h1>Config Ace ✪</h1>
     <caption>Config Ace is a tool that makes creating CS:GO Config files super simple.</caption>
 
@@ -54,6 +54,7 @@
     <p>You can now reference your config file by name in the <b>console</b>, or you can add it to your <b>CS:GO launch options</b> on Steam.</p>
 
     <span>Have a suggestion or some feedback? Create a <a target="_blank" href="https://github.com/samuelsogbesan/config-ace/issues/new?title=[📝] Suggestion: Suggestion Title Goes Here&body=Write here about your suggestion. Thanks for the contribution! ✌️" referrerpolicy="no-referrer">GitHub Issue</a></span>
+    <form id="popup-closer-2"><input type="submit" class="secondary-submit" value="Get Started"></form>
   </div>
 
   <div id="content-blocker" class="hidden"></div>
@@ -61,8 +62,8 @@
   <header style="width: 100%; display: flex; justify-content: center;">
     <nav id="main-menu">
       <a id="main-brand" href="/">Config Ace ✪</a>
-      <ul>
-        <li><a href="/">App</a></li>
+      <ul style="display: none;">
+        <li><button id="slide-menu-button" href="/">Menu</button></li>
       </ul>
     </nav>
   </header>
@@ -133,6 +134,14 @@
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
+  </section>
+
+  <section id="slide-menu" style="display: none;">
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
   </section>
   
 

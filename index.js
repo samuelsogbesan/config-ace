@@ -180,6 +180,12 @@ document.body.onload = event => {
     UIManagementTools.hidePopup();
   });
 
+  document.getElementById('popup-closer-2').addEventListener('submit', event => {
+    event.preventDefault();
+    UIManagementTools.hidePopup();
+  });
+
+
   const fileLoadHandler = event => {
     let formdata = new FormData(event.target);
     let file = formdata.get("file");
@@ -245,4 +251,8 @@ document.body.onload = event => {
   UIManagementTools.refreshPanel(ConfigState.export().join('\n'));
 
   UIManagementTools.showPopup({stubborn: true});
+
+  document.getElementById('slide-menu-button').addEventListener('', () => {
+    // slide out the slide menu
+  });
 };
