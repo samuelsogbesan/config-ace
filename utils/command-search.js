@@ -1,6 +1,10 @@
-const rawCovars = require('../constants/commands');
+const COVARS = require('../constants/commands');
+//const Trie = require('./Trie');
 
-const commands = JSON.parse(rawCovars);
+const commands = COVARS;
+
+//let commandTrie = new Trie();
+//commands.forEach(command => commandTrie.add(command, command));
 
 /**
  * Search convars
