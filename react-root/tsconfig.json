@@ -1,0 +1,17 @@
+{
+    "include": ["./src/**/*"],
+    "exclude": ["./node_modules", "./dist", "./.parcel-cache"],
+    "compilerOptions": {
+        "module": "es6",
+        "target": "es5",
+        "jsx": "react",
+        "lib": [
+            "DOM",
+            "DOM.Iterable",
+            "ESNext"
+        ],
+        "allowJs": true,
+        "esModuleInterop": true,
+        "moduleResolution": "node"
+    }
+}
